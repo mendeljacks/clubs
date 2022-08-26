@@ -3,8 +3,13 @@ import Fastify from 'fastify'
 import { handler } from '..'
 import { introspect } from '../config/orma'
 import { prepopulate } from '../scripts/prepopulate'
-import { google_login_callback, google_login, google_auth_headless } from './auth/auth_google'
-import { mutate, query, welcome } from './controllers'
+import { mutate, query } from './controllers'
+import { welcome } from 'biab/src/api/controllers'
+import {
+    google_auth_headless,
+    google_login,
+    google_login_callback
+} from 'biab/src/api/auth/auth_google'
 
 export const start = async () => {
     await introspect()
@@ -13,8 +18,14 @@ export const start = async () => {
     const app = Fastify()
     await app.register(cors)
 
-    app.get('/', handler(welcome))
-    app.get('/auth/google/login', handler(google_login))
+    app.get(
+        '/',
+        handler(_ => welcome(process.env.SERVER_ROOT_URI))
+    )
+    app.get(
+        '/auth/google/login',
+        handler((req, res) => google_login(res, process.env.SERVER_ROOT_URI))
+    )
     app.get('/auth/google/callback', handler(google_login_callback))
     app.post('/auth/google/headless', handler(google_auth_headless))
     app.post('/query', handler(query))
