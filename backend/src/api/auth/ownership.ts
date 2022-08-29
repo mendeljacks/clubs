@@ -1,11 +1,12 @@
+import { TokenContent } from 'biab/src/api/auth/auth'
+import { byo_query_fn } from 'biab/src/config/orma'
 import { orma_mutate_prepare } from 'orma/src'
 import { push_path } from 'orma/src/helpers/push_path'
 import { OrmaSchema } from 'orma/src/introspector/introspector'
 import { get_mutation_connected_errors } from 'orma/src/mutate/verifications/mutation_connected'
 import { WhereConnected } from 'orma/src/types/query/query_types'
 import { orma_schema } from '../../../../common/orma_schema'
-import { byo_query_fn } from '../../config/orma'
-import { TokenContent } from './auth'
+import { pool } from '../../config/pg'
 import { connection_edges } from './connection_edges'
 import { admin } from './roles'
 
@@ -46,7 +47,7 @@ const get_mutate_ownership_errors = async (
     const connected_errors = await get_mutation_connected_errors(
         orma_schema,
         connection_edges,
-        async statements => byo_query_fn(statements, undefined),
+        async statements => byo_query_fn(statements, pool),
         [{ $entity: 'users', $field: 'id', $values: [token_content.user_id] }],
         mutation_plan.mutation_pieces
     )

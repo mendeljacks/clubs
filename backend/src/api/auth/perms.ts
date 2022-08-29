@@ -1,6 +1,6 @@
+import { TokenContent } from 'biab/src/api/auth/auth'
 import { mutation_entity_deep_for_each } from 'orma/src/mutate/helpers/mutate_helpers'
 import { query_for_each } from 'orma/src/query/query_helpers'
-import { TokenContent } from './auth'
 import { role_has_perms } from './roles'
 
 export const ensure_perms = async (
