@@ -350,13 +350,6 @@ export const orma_schema = {
     ]
   },
   "places": {
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 5,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -371,6 +364,19 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
     "name": {
       "data_type": "character varying",
       "ordinal_position": 2,
@@ -380,12 +386,6 @@ export const orma_schema = {
     "google_place_id": {
       "data_type": "character varying",
       "ordinal_position": 3,
-      "character_count": 10485760
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 6,
-      "not_null": true,
       "character_count": 10485760
     },
     "$indexes": [
@@ -509,12 +509,6 @@ export const orma_schema = {
       "primary_key": true,
       "character_count": 32
     },
-    "url": {
-      "data_type": "integer",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 32
-    },
     "created_at": {
       "data_type": "timestamp without time zone",
       "ordinal_position": 3,
@@ -532,6 +526,12 @@ export const orma_schema = {
     "resource_id": {
       "data_type": "character varying",
       "ordinal_position": 5,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "url": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
       "not_null": true,
       "character_count": 10485760
     },
@@ -595,15 +595,15 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
-    "name": {
-      "data_type": "character varying",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 10485760
-    },
     "resource_id": {
       "data_type": "character varying",
       "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "name": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
       "not_null": true,
       "character_count": 10485760
     },

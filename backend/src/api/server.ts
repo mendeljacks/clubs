@@ -16,7 +16,7 @@ import { populated_data } from '../scripts/prepopulate'
 import { role_has_perms } from './auth/roles'
 
 export const start = async () => {
-    await introspect('../orma_schema.ts', pool)
+    await introspect('../common/orma_schema.ts', pool)
     await prepopulate(populated_data, pool)
 
     const app = Fastify()
