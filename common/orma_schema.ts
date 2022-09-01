@@ -36,8 +36,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "created_at": {
       "data_type": "timestamp without time zone",
@@ -127,8 +126,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "user_id": {
       "data_type": "integer",
@@ -206,8 +204,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "created_at": {
       "data_type": "timestamp without time zone",
@@ -268,8 +265,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "user_id": {
       "data_type": "integer",
@@ -359,8 +355,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "created_at": {
       "data_type": "timestamp without time zone",
@@ -434,8 +429,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "review_id": {
       "data_type": "integer",
@@ -513,8 +507,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "created_at": {
       "data_type": "timestamp without time zone",
@@ -575,8 +568,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "photo_id": {
       "data_type": "integer",
@@ -648,8 +640,7 @@ export const orma_schema = {
       "ordinal_position": 1,
       "not_null": true,
       "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
+      "character_count": 32
     },
     "club_id": {
       "data_type": "integer",

@@ -51,6 +51,16 @@ const aws = async version => {
             '.'
         ])
         await run_process(['docker', 'push', image])
+        await run_process([
+            'aws',
+            'ecs',
+            'update-service',
+            '--cluster',
+            'clubs-test',
+            '--service',
+            'clubs-test-service',
+            '--force-new-deployment'
+        ])
     } catch (error) {
         console.error('Failed to deploy')
         console.error(error)
