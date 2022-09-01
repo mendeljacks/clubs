@@ -15,7 +15,7 @@ import { introspect } from 'biab/src/config/orma'
 import { prepopulate } from 'biab/src/scripts/prepopulate'
 import { populated_data } from '../scripts/prepopulate'
 import { role_has_perms } from './auth/roles'
-// // import git from 'git-rev-sync'
+import git from 'git-rev-sync'
 
 export const start = async () => {
     const orma_schema = await introspect('../common/orma_schema.ts', pool)
@@ -26,7 +26,7 @@ export const start = async () => {
 
     app.get(
         '/',
-        handler(_ => welcome(process.env.SERVER_ROOT_URI + ' Version: ' + 'git.short())'))
+        handler(_ => welcome(process.env.SERVER_ROOT_URI + ' Version: ' + git.short()))
     )
     app.get(
         '/auth/google/login',
