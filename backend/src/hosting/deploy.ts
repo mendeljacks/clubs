@@ -1,7 +1,7 @@
 import cuid from 'cuid'
 import git from 'git-rev-sync'
 import { run_tests } from './helpers/promise_mocha'
-import { run_process } from './helpers/run_process'
+import { run_process } from 'biab/src/hosting/run_process'
 
 export const deploy = async () => {
     try {

@@ -1,5 +1,5 @@
 {
-    "name": "biab",
+    "name": "clubs",
     "version": "1.0.4",
     "description": "",
     "main": "build/index.js",
@@ -38,7 +38,7 @@
         "ajv": "^8.11.0",
         "axios": "^0.27.2",
         "bcrypt": "^5.0.1",
-        "biab": "^1.0.10",
+        "biab": "^1.0.11",
         "cuid": "^2.1.8",
         "fastify": "^4.4.0",
         "jsonwebtoken": "^8.5.1",

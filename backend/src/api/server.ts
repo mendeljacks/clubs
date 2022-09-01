@@ -7,7 +7,8 @@ import {
     google_login,
     google_login_callback
 } from 'biab/src/api/auth/auth_google'
-import { ensure_user_exists } from './auth/ensure_user_exists'
+import { apple_auth_headless } from 'biab/src/api/auth/auth_apple'
+import { ensure_apple_user_exists, ensure_user_exists } from './auth/ensure_user_exists'
 import { pool } from '../config/pg'
 import { connection_edges } from './auth/connection_edges'
 import { introspect } from 'biab/src/config/orma'
@@ -16,8 +17,8 @@ import { populated_data } from '../scripts/prepopulate'
 import { role_has_perms } from './auth/roles'
 
 export const start = async () => {
-    await introspect('../common/orma_schema.ts', pool)
-    await prepopulate(populated_data, pool)
+    const orma_schema = await introspect('../common/orma_schema.ts', pool)
+    await prepopulate(populated_data, pool, orma_schema)
 
     const app = Fastify()
     await app.register(cors)
@@ -52,15 +53,26 @@ export const start = async () => {
         )
     )
     app.post(
+        '/auth/apple/headless',
+        handler((req, res) =>
+            apple_auth_headless(
+                req.body,
+                ensure_apple_user_exists,
+                process.env.jwt_secret,
+                'com.sigmasoftware.clubapp'
+            )
+        )
+    )
+    app.post(
         '/query',
         handler((req, res) =>
-            query(req, process.env.jwt_secret, pool, connection_edges, role_has_perms)
+            query(req, process.env.jwt_secret, pool, connection_edges, role_has_perms, orma_schema)
         )
     )
     app.post(
         '/mutate',
         handler((req, res) =>
-            mutate(req, process.env.jwt_secret, pool, connection_edges, role_has_perms)
+            mutate(req, process.env.jwt_secret, pool, connection_edges, role_has_perms, orma_schema)
         )
     )
 
