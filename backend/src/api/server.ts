@@ -16,6 +16,7 @@ import { prepopulate } from 'biab/src/scripts/prepopulate'
 import { populated_data } from '../scripts/prepopulate'
 import { role_has_perms } from './auth/roles'
 import { default as package_json } from '../../package.json'
+import { ensure_ownership } from './auth/ownership'
 
 export const start = async () => {
     const orma_schema = await introspect('../common/orma_schema.ts', pool)
@@ -65,13 +66,29 @@ export const start = async () => {
     app.post(
         '/query',
         handler((req, res) =>
-            query(req, process.env.jwt_secret, pool, connection_edges, role_has_perms, orma_schema)
+            query(
+                req,
+                process.env.jwt_secret,
+                pool,
+                connection_edges,
+                role_has_perms,
+                orma_schema,
+                ensure_ownership
+            )
         )
     )
     app.post(
         '/mutate',
         handler((req, res) =>
-            mutate(req, process.env.jwt_secret, pool, connection_edges, role_has_perms, orma_schema)
+            mutate(
+                req,
+                process.env.jwt_secret,
+                pool,
+                connection_edges,
+                role_has_perms,
+                orma_schema,
+                ensure_ownership
+            )
         )
     )
 

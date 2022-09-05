@@ -1,19 +1,22 @@
-import { TokenContent } from 'biab/src/api/auth/auth'
-import { byo_query_fn } from 'biab/src/config/orma'
 import { orma_mutate_prepare } from 'orma/src'
 import { push_path } from 'orma/src/helpers/push_path'
 import { OrmaSchema } from 'orma/src/introspector/introspector'
 import { get_mutation_connected_errors } from 'orma/src/mutate/verifications/mutation_connected'
+import { ConnectionEdges } from 'orma/src/query/macros/where_connected_macro'
 import { WhereConnected } from 'orma/src/types/query/query_types'
-import { orma_schema } from '../../../../common/orma_schema'
-import { pool } from '../../config/pg'
-import { connection_edges } from './connection_edges'
-import { admin } from './roles'
+import { byo_query_fn, Pool } from '../../../../../biab/src/config/orma'
+import { TokenContent } from '../../../../../biab/src/api/auth/auth'
+
+export const admin = 1
+export const user = 2
 
 export const ensure_ownership = async (
     query,
     token_content: TokenContent,
-    mode: 'query' | 'mutate'
+    mode: 'query' | 'mutate',
+    connection_edges: ConnectionEdges,
+    pool: Pool,
+    orma_schema: OrmaSchema
 ) => {
     if (token_content.role_ids.includes(admin)) {
         return []
@@ -22,7 +25,13 @@ export const ensure_ownership = async (
     let errors =
         mode === 'query'
             ? await get_query_ownership_errors(query, token_content)
-            : await get_mutate_ownership_errors(query, token_content, schema)
+            : await get_mutate_ownership_errors(
+                  query,
+                  token_content,
+                  schema,
+                  connection_edges,
+                  pool
+              )
 
     if (errors.length > 0) {
         throw errors
@@ -41,7 +50,9 @@ export const array_equals = (a, b) => {
 const get_mutate_ownership_errors = async (
     mutation,
     token_content: TokenContent,
-    orma_schema: OrmaSchema
+    orma_schema: OrmaSchema,
+    connection_edges: ConnectionEdges,
+    pool: Pool
 ) => {
     const mutation_plan = orma_mutate_prepare(orma_schema, mutation)
     const connected_errors = await get_mutation_connected_errors(
