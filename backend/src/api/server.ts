@@ -56,12 +56,10 @@ export const start = async () => {
     app.post(
         '/auth/apple/headless',
         handler((req, res) =>
-            apple_auth_headless(
-                req.body,
-                ensure_apple_user_exists,
-                process.env.jwt_secret,
-                'com.sigmasoftware.clubapp'
-            )
+            apple_auth_headless(req.body, ensure_apple_user_exists, process.env.jwt_secret, [
+                'com.sigmasoftware.clubapp',
+                'com.sigmasoftware.clubapp.applesignin'
+            ])
         )
     )
     app.post(
