@@ -4,11 +4,13 @@ import { OrmaSchema } from 'orma/src/introspector/introspector'
 import { get_mutation_connected_errors } from 'orma/src/mutate/verifications/mutation_connected'
 import { ConnectionEdges } from 'orma/src/query/macros/where_connected_macro'
 import { WhereConnected } from 'orma/src/types/query/query_types'
-import { byo_query_fn, Pool } from '../../../../../biab/src/config/orma'
-import { TokenContent } from '../../../../../biab/src/api/auth/auth'
 
-export const admin = 1
-export const user = 2
+import { query_for_each } from 'orma/src/query/query_helpers'
+import { OrmaQuery } from 'orma/src/types/query/query_types'
+import { admin } from './roles'
+
+import { TokenContent } from '../../../../../biab/src/api/auth/auth'
+import { byo_query_fn, Pool } from '../../../../../biab/src/config/orma'
 
 export const ensure_ownership = async (
     query,
@@ -65,7 +67,24 @@ const get_mutate_ownership_errors = async (
     return connected_errors
 }
 
-const get_query_ownership_errors = async (query, token_content: TokenContent) => {
+const get_query_table_names = (query: OrmaQuery<any>): string[] => {
+    let table_names = new Set<string>()
+    query_for_each(query, (value, path, entity_name: string) => {
+        table_names.add(entity_name)
+    })
+    return [...table_names]
+}
+type Error = { message: string }
+const get_query_ownership_errors = async (query, token_content: TokenContent): Promise<Error[]> => {
+    const table_names = get_query_table_names(query)
+    if (
+        table_names.every((table_name: string) =>
+            ['users', 'user_has_photos', 'photos'].includes(table_name)
+        )
+    ) {
+        return []
+    }
+
     const user_id = token_content.user_id
     const where_connected: WhereConnected<OrmaSchema> = query.$where_connected ?? []
 

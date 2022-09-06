@@ -53,6 +53,16 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
+    "photo_id": {
+      "data_type": "integer",
+      "ordinal_position": 10,
+      "character_count": 32,
+      "references": {
+        "photos": {
+          "id": {}
+        }
+      }
+    },
     "email": {
       "data_type": "character varying",
       "ordinal_position": 2,
@@ -100,6 +110,14 @@ export const orma_schema = {
         "is_unique": true,
         "fields": [
           "phone"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "users_photo_id_uq",
+        "is_unique": true,
+        "fields": [
+          "photo_id"
         ],
         "invisible": false
       },
@@ -376,6 +394,11 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
+    "google_place_id": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
+      "character_count": 10485760
+    },
     "resource_id": {
       "data_type": "character varying",
       "ordinal_position": 6,
@@ -386,11 +409,6 @@ export const orma_schema = {
       "data_type": "character varying",
       "ordinal_position": 2,
       "not_null": true,
-      "character_count": 10485760
-    },
-    "google_place_id": {
-      "data_type": "character varying",
-      "ordinal_position": 3,
       "character_count": 10485760
     },
     "$indexes": [
