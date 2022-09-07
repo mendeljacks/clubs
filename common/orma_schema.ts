@@ -281,6 +281,13 @@ export const orma_schema = {
     ]
   },
   "reviews": {
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 7,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -320,13 +327,6 @@ export const orma_schema = {
     "created_at": {
       "data_type": "timestamp without time zone",
       "ordinal_position": 6,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 7,
       "not_null": true,
       "decimal_places": 6,
       "default": "now()"
@@ -394,11 +394,6 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
-    "google_place_id": {
-      "data_type": "character varying",
-      "ordinal_position": 3,
-      "character_count": 10485760
-    },
     "resource_id": {
       "data_type": "character varying",
       "ordinal_position": 6,
@@ -409,6 +404,11 @@ export const orma_schema = {
       "data_type": "character varying",
       "ordinal_position": 2,
       "not_null": true,
+      "character_count": 10485760
+    },
+    "google_place_id": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
       "character_count": 10485760
     },
     "$indexes": [
@@ -548,15 +548,15 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 5,
-      "not_null": true,
-      "character_count": 10485760
-    },
     "url": {
       "data_type": "character varying",
       "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 5,
       "not_null": true,
       "character_count": 10485760
     },
@@ -621,17 +621,22 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
+    "name": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
     "resource_id": {
       "data_type": "character varying",
       "ordinal_position": 6,
       "not_null": true,
       "character_count": 10485760
     },
-    "name": {
+    "description": {
       "data_type": "character varying",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 10485760
+      "ordinal_position": 7,
+      "character_count": 10000
     },
     "$indexes": [
       {
