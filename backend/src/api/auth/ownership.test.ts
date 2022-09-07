@@ -45,6 +45,6 @@ describe('Ownership', () => {
             orma_schema as unknown as OrmaSchema
         )
 
-        expect(true).to.equal(false)
+        expect(result).to.equal(undefined)
     })
 })

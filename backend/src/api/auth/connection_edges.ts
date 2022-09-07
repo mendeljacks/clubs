@@ -19,12 +19,12 @@ const add_edges: Edge[] = [
 ]
 
 const remove_edges: Edge[] = [
-    // {
-    //     from_entity: 'shipments',
-    //     from_field: 'warehouse_id_dest',
-    //     to_entity: 'warehouses',
-    //     to_field: 'id'
-    // },
+    {
+        from_entity: 'club_has_users',
+        from_field: 'user_id',
+        to_entity: 'users',
+        to_field: 'id'
+    }
 ]
 
 export const connection_edges = add_connection_edges(
