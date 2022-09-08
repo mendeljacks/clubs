@@ -36,7 +36,7 @@ export const deploy = async () => {
 const aws = async version => {
     try {
         // Run aws configure
-        // Login with: ws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 684954451958.dkr.ecr.eu-central-1.amazonaws.com
+        // Login with: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 684954451958.dkr.ecr.eu-central-1.amazonaws.com
 
         //  aws ecs update-service --cluster clubs-test --service clubs-test-service --force-new-deployment
         const image = `684954451958.dkr.ecr.eu-central-1.amazonaws.com/clubs:latest`
