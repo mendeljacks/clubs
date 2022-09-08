@@ -9,8 +9,8 @@ import { query_for_each } from 'orma/src/query/query_helpers'
 import { OrmaQuery } from 'orma/src/types/query/query_types'
 import { admin } from './roles'
 
-import { TokenContent } from '../../../../../biab/src/api/auth/auth'
-import { byo_query_fn, Pool } from '../../../../../biab/src/config/orma'
+import { TokenContent } from 'biab/src/api/auth/auth'
+import { byo_query_fn, Pool } from 'biab/src/config/orma'
 
 export const ensure_ownership = async (
     query,
