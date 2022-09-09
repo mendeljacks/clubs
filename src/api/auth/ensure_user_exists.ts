@@ -3,7 +3,7 @@ import { EnsureUserExistsFn, GoogleUser } from 'biab/src/api/auth/auth_google'
 import { mutate_handler } from 'biab/src/config/orma'
 import { query_handler } from 'biab/src/config/orma'
 import { OrmaSchema } from 'orma/src/introspector/introspector'
-import { orma_schema } from '../../../../common/orma_schema'
+import { orma_schema } from '../../../generated/orma_schema'
 import { pool } from '../../config/pg'
 import { user } from './roles'
 

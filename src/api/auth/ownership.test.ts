@@ -4,9 +4,9 @@ import { TokenContent } from 'biab/src/api/auth/auth'
 import { user } from './roles'
 import { connection_edges } from './connection_edges'
 import { fake_pool } from 'biab/src/tests/fake_pool'
-import { orma_schema } from '../../../../common/orma_schema'
 import { OrmaSchema } from 'orma/src/introspector/introspector'
 import { ensure_ownership } from './ownership'
+import { orma_schema } from '../../../generated/orma_schema'
 
 describe('Ownership', () => {
     test('A user can add another user to a club', async () => {

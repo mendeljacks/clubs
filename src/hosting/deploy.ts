@@ -20,7 +20,7 @@ export const deploy = async () => {
                 spec: ['**/src/**/*.test.ts']
             },
             file => file.slice(-8) === '.test.ts',
-            './backend/src'
+            './src'
         )
 
         await Promise.all([aws(version)])
@@ -41,15 +41,7 @@ const aws = async version => {
         //  aws ecs update-service --cluster clubs-test --service clubs-test-service --force-new-deployment
         const image = `684954451958.dkr.ecr.eu-central-1.amazonaws.com/clubs:latest`
 
-        await run_process([
-            'docker',
-            'build',
-            '-f',
-            'backend/src/hosting/Dockerfile',
-            '--tag',
-            image,
-            '.'
-        ])
+        await run_process(['docker', 'build', '-f', 'src/hosting/Dockerfile', '--tag', image, '.'])
         await run_process(['docker', 'push', image])
         await run_process([
             'aws',
