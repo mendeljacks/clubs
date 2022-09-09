@@ -1,4 +1,5 @@
 import cors from '@fastify/cors'
+import formbody from '@fastify/formbody'
 import Fastify from 'fastify'
 import { handler } from '..'
 import { mutate, query, welcome } from 'biab/src/api/controllers'
@@ -32,6 +33,7 @@ export const start = async () => {
 
     const app = Fastify()
     await app.register(cors)
+    await app.register(formbody)
 
     app.get(
         '/',
