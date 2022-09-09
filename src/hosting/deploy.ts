@@ -5,7 +5,6 @@ import { run_process } from 'biab/src/hosting/run_process'
 
 export const deploy = async () => {
     try {
-        process.chdir('../')
         const version = 'GIT_' + git.short() + '_GID_' + cuid()
 
         const result = await run_tests(
@@ -17,7 +16,7 @@ export const deploy = async () => {
                 fullTrace: true,
                 inlineDiffs: true,
                 require: ['ts-node/register', 'dotenv/config'],
-                spec: ['**/src/**/*.test.ts']
+                spec: ['src/**/*.test.ts']
             },
             file => file.slice(-8) === '.test.ts',
             './src'

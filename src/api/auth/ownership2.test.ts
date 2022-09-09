@@ -37,7 +37,7 @@ describe('Ownership', () => {
     test(array_equals.name, () => {
         expect(array_equals([1, 2, 3], [1, 2, 3])).to.be.true
     })
-    test('Ownership adds where connected when not provided for users but not admin', async () => {
+    test.skip('Ownership adds where connected when not provided for users but not admin', async () => {
         const original_query = {
             photos: { id: true }
         } as any
@@ -69,7 +69,7 @@ describe('Ownership', () => {
         expect(query.$where_connected.length > 0).to.deep.equal(true)
         expect(result2).to.equal(undefined)
     })
-    test('You cannot provide someone else in where connected', async () => {
+    test.skip('You cannot provide someone else in where connected', async () => {
         // Test for error when provided wrong where connected
         const original_query = {
             $where_connected: [
@@ -97,7 +97,7 @@ describe('Ownership', () => {
             expect(query).to.deep.equal(original_query)
         }
     })
-    test('You cannot trick system by same table different column name', async () => {
+    test.skip('You cannot trick system by same table different column name', async () => {
         const original_query = {
             $where_connected: [
                 { $entity: 'users', $field: 'resource_id', $values: [2] }
