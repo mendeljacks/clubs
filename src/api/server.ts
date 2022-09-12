@@ -19,13 +19,7 @@ import { role_has_perms } from './auth/roles'
 import { default as package_json } from '../../package.json'
 import { sign_in_with_apple } from 'biab/src/api/auth/auth_apple_callback'
 import { ensure_ownership } from './auth/ownership'
-
-const key_contents =
-    '-----BEGIN PRIVATE KEY-----|MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgwEwwvprT9XYCYUlt|1Cqjb/h1Kg9GEyxsDPciTYvCiX+gCgYIKoZIzj0DAQehRANCAASxKpAE7pDQF5Q0|PCletiD92V/idnOoW2ROwYwsHlMFuHptFvoizv5QtL0o+rIgKTREg7H52AKQEaik|THXg2Dob|-----END PRIVATE KEY-----' // The contents of service key downloaded during the service creation replace line break with |
-const bundle_id = 'com.sigmasoftware.clubapp' // The Bundle ID of your app
-const service_id = `${bundle_id}.applesignin` // https://developer.apple.com/account/resources/identifiers/list/serviceId
-const team_id = 'HTEV8H9ZW8' // Found in the top-right corner of https://developer.apple.com/account/resources/certificates/list
-const key_id = 'ZB7F2T9QMQ' // key you created for Sign in with Apple
+import * as apple from '../config/apple.json'
 
 export const start = async () => {
     const orma_schema = await introspect('./generated/orma_schema.ts', pool)
@@ -72,11 +66,11 @@ export const start = async () => {
             sign_in_with_apple(
                 req,
                 process.env.SERVER_ROOT_URI,
-                bundle_id,
-                service_id,
-                team_id,
-                key_contents,
-                key_id
+                apple.bundle_id,
+                apple.service_id,
+                apple.team_id,
+                apple.key_contents,
+                apple.key_id
             )
         )
     )
@@ -84,8 +78,8 @@ export const start = async () => {
         '/auth/apple/headless',
         handler((req, res) =>
             apple_auth_headless(req.body, ensure_apple_user_exists, process.env.jwt_secret, [
-                bundle_id,
-                service_id
+                apple.bundle_id,
+                apple.service_id
             ])
         )
     )
