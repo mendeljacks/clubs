@@ -35,22 +35,21 @@ export const deploy = async () => {
 const aws = async version => {
     try {
         // Run aws configure
-        // Login with: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 684954451958.dkr.ecr.eu-central-1.amazonaws.com
-
-        //  aws ecs update-service --cluster clubs-test --service clubs-test-service --force-new-deployment
-        const image = `684954451958.dkr.ecr.eu-central-1.amazonaws.com/clubs:latest`
-
-        await run_process(['docker', 'build', '-f', 'src/hosting/Dockerfile', '--tag', image, '.'])
-        await run_process(['docker', 'push', image])
+        // change run_process second arg to { stdio: 'inherit', shell: true }
         await run_process([
-            'aws',
-            'ecs',
-            'update-service',
-            '--cluster',
-            'clubs-test',
-            '--service',
-            'clubs-test-service',
-            '--force-new-deployment'
+            'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 684954451958.dkr.ecr.eu-central-1.amazonaws.com'
+        ]).catch(err => {
+            console.log(err)
+        })
+
+        await run_process([
+            'docker build -f src/hosting/Dockerfile --tag 684954451958.dkr.ecr.eu-central-1.amazonaws.com/clubs:latest .'
+        ])
+        await run_process([
+            'docker push 684954451958.dkr.ecr.eu-central-1.amazonaws.com/clubs:latest'
+        ])
+        await run_process([
+            'aws ecs update-service --cluster clubs-test --service clubs-test-service --force-new-deployment'
         ])
     } catch (error) {
         console.error('Failed to deploy')
