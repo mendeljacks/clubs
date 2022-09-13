@@ -42,6 +42,16 @@ export const deploy = async () => {
 
 const aws = async version => {
     try {
+        await run_process([
+            'aws',
+            `configure set aws_access_key_id ${process.env.AWS_ACCESS_KEY_ID}`
+        ])
+        await run_process([
+            'aws',
+            `configure set aws_secret_access_key ${process.env.AWS_SECRET_ACCESS_KEY}`
+        ])
+        await run_process(['aws', `configure set region eu-central-1`])
+
         // Run aws configure
         await run_process([
             'aws',
