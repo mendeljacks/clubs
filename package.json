@@ -40,6 +40,7 @@
     "dependencies": {
         "@fastify/cors": "^8.1.0",
         "@fastify/formbody": "^7.2.0",
+        "@malept/cross-spawn-promise": "^2.0.0",
         "ajv": "^8.11.0",
         "axios": "^0.27.2",
         "bcrypt": "^5.0.1",

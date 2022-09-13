@@ -1,0 +1,18 @@
+
+name: Build and Deploy
+
+on: push
+
+jobs:
+    backend:
+        name: Backend
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@master
+
+            - name: npm i -> backend
+              run: npm install
+
+            - name: run npm deploy
+              run: SECRET_KEY=${{secrets.SECRET_KEY}} npm run deploy
