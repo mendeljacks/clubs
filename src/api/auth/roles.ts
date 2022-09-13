@@ -8,8 +8,6 @@ const admin_only = [admin]
 const disabled = []
 export const role_has_perms = {
     migrations: { create: disabled, read: disabled, update: disabled, delete: disabled },
-    club_has_users: { create: everyone, read: everyone, update: everyone, delete: everyone },
-    clubs: { create: everyone, read: everyone, update: everyone, delete: everyone },
     review_has_photos: { create: everyone, read: everyone, update: everyone, delete: everyone },
     photos: { create: everyone, read: everyone, update: disabled, delete: everyone },
     reviews: { create: everyone, read: everyone, update: everyone, delete: admin_only },

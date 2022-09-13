@@ -18,14 +18,7 @@ const add_edges: Edge[] = [
     }
 ]
 
-const remove_edges: Edge[] = [
-    {
-        from_entity: 'club_has_users',
-        from_field: 'user_id',
-        to_entity: 'users',
-        to_field: 'id'
-    }
-]
+const remove_edges: Edge[] = []
 
 export const connection_edges = add_connection_edges(
     remove_connection_edges(baseline_edges, remove_edges),
