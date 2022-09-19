@@ -30,6 +30,71 @@ export const orma_schema = {
       }
     ]
   },
+  "listings": {
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "user_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "users": {
+          "id": {}
+        }
+      }
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "description": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "listings_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "listings_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
   "users": {
     "id": {
       "data_type": "integer",
@@ -131,6 +196,182 @@ export const orma_schema = {
       },
       {
         "index_name": "users_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "places": {
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "listing_id": {
+      "data_type": "integer",
+      "ordinal_position": 7,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "listings": {
+          "id": {}
+        }
+      }
+    },
+    "google_place_id": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "name": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "places_google_place_id_uq",
+        "is_unique": true,
+        "fields": [
+          "google_place_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "places_listing_id_uq",
+        "is_unique": true,
+        "fields": [
+          "listing_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "places_name_uq",
+        "is_unique": true,
+        "fields": [
+          "name"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "places_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "places_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "reviews": {
+    "rating": {
+      "data_type": "integer",
+      "ordinal_position": 4,
+      "not_null": true,
+      "character_count": 32
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 6,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 7,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "listing_id": {
+      "data_type": "integer",
+      "ordinal_position": 9,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "listings": {
+          "id": {}
+        }
+      }
+    },
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "user_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "users": {
+          "id": {}
+        }
+      }
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 8,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "comment": {
+      "data_type": "character varying",
+      "ordinal_position": 5,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "reviews_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "reviews_resource_id_uq",
         "is_unique": true,
         "fields": [
           "resource_id"
@@ -280,172 +521,6 @@ export const orma_schema = {
       }
     ]
   },
-  "reviews": {
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 7,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "user_id": {
-      "data_type": "integer",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "users": {
-          "id": {}
-        }
-      }
-    },
-    "place_id": {
-      "data_type": "integer",
-      "ordinal_position": 3,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "places": {
-          "id": {}
-        }
-      }
-    },
-    "rating": {
-      "data_type": "integer",
-      "ordinal_position": 4,
-      "not_null": true,
-      "character_count": 32
-    },
-    "created_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 6,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "comment": {
-      "data_type": "character varying",
-      "ordinal_position": 5,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 8,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "$indexes": [
-      {
-        "index_name": "reviews_pkey",
-        "is_unique": true,
-        "fields": [
-          "id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "reviews_resource_id_uq",
-        "is_unique": true,
-        "fields": [
-          "resource_id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "reviews_user_id_place_id_uq",
-        "is_unique": true,
-        "fields": [
-          "place_id",
-          "user_id"
-        ],
-        "invisible": false
-      }
-    ]
-  },
-  "places": {
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "created_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 4,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 5,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 6,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "name": {
-      "data_type": "character varying",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "google_place_id": {
-      "data_type": "character varying",
-      "ordinal_position": 3,
-      "character_count": 10485760
-    },
-    "$indexes": [
-      {
-        "index_name": "places_google_place_id_uq",
-        "is_unique": true,
-        "fields": [
-          "google_place_id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "places_name_uq",
-        "is_unique": true,
-        "fields": [
-          "name"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "places_pkey",
-        "is_unique": true,
-        "fields": [
-          "id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "places_resource_id_uq",
-        "is_unique": true,
-        "fields": [
-          "resource_id"
-        ],
-        "invisible": false
-      }
-    ]
-  },
   "review_has_photos": {
     "id": {
       "data_type": "integer",
@@ -548,15 +623,15 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
-    "url": {
-      "data_type": "character varying",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 10485760
-    },
     "resource_id": {
       "data_type": "character varying",
       "ordinal_position": 5,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "url": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
       "not_null": true,
       "character_count": 10485760
     },
@@ -582,168 +657,6 @@ export const orma_schema = {
         "is_unique": true,
         "fields": [
           "url"
-        ],
-        "invisible": false
-      }
-    ]
-  },
-  "clubs": {
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "photo_id": {
-      "data_type": "integer",
-      "ordinal_position": 3,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "photos": {
-          "id": {}
-        }
-      }
-    },
-    "created_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 4,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 5,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "name": {
-      "data_type": "character varying",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 6,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "description": {
-      "data_type": "character varying",
-      "ordinal_position": 7,
-      "character_count": 10000
-    },
-    "$indexes": [
-      {
-        "index_name": "clubs_name_uq",
-        "is_unique": true,
-        "fields": [
-          "name"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "clubs_pkey",
-        "is_unique": true,
-        "fields": [
-          "id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "clubs_resource_id_uq",
-        "is_unique": true,
-        "fields": [
-          "resource_id"
-        ],
-        "invisible": false
-      }
-    ]
-  },
-  "club_has_users": {
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "club_id": {
-      "data_type": "integer",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "clubs": {
-          "id": {}
-        }
-      }
-    },
-    "user_id": {
-      "data_type": "integer",
-      "ordinal_position": 3,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "users": {
-          "id": {}
-        }
-      }
-    },
-    "is_admin": {
-      "data_type": "boolean",
-      "ordinal_position": 4,
-      "not_null": true
-    },
-    "created_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 5,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 6,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 7,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "$indexes": [
-      {
-        "index_name": "club_has_users_club_id_user_id_uq",
-        "is_unique": true,
-        "fields": [
-          "user_id",
-          "club_id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "club_has_users_pkey",
-        "is_unique": true,
-        "fields": [
-          "id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "club_has_users_resource_id_uq",
-        "is_unique": true,
-        "fields": [
-          "resource_id"
         ],
         "invisible": false
       }
