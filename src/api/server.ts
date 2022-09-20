@@ -10,7 +10,7 @@ import {
 } from 'biab/src/api/auth/auth_google'
 import { apple_auth_headless } from 'biab/src/api/auth/auth_apple'
 import { ensure_apple_user_exists, ensure_user_exists } from './auth/ensure_user_exists'
-import { pool } from '../config/pg'
+import { byo_query_fn, pool, trans } from '../config/pg'
 import { connection_edges } from './auth/connection_edges'
 import { introspect } from 'biab/src/config/orma'
 import { prepopulate } from 'biab/src/scripts/prepopulate'
@@ -20,10 +20,11 @@ import { default as package_json } from '../../package.json'
 import { sign_in_with_apple } from 'biab/src/api/auth/auth_apple_callback'
 import { ensure_ownership } from './auth/ownership'
 import * as apple from '../config/apple.json'
+import { add_resource_ids } from 'biab/src/config/extra_macros'
 
 export const start = async () => {
-    const orma_schema = await introspect('./generated/orma_schema.ts', pool)
-    await prepopulate(populated_data, pool, orma_schema)
+    const orma_schema = await introspect('./generated/orma_schema.ts', pool, byo_query_fn)
+    await prepopulate(populated_data, pool, orma_schema, byo_query_fn, trans)
 
     const app = Fastify()
     await app.register(cors)
@@ -94,7 +95,8 @@ export const start = async () => {
                 connection_edges,
                 role_has_perms,
                 orma_schema,
-                ensure_ownership
+                ensure_ownership,
+                byo_query_fn
             )
         )
     )
@@ -108,7 +110,10 @@ export const start = async () => {
                 connection_edges,
                 role_has_perms,
                 orma_schema,
-                ensure_ownership
+                ensure_ownership,
+                byo_query_fn,
+                trans,
+                add_resource_ids
             )
         )
     )

@@ -11,6 +11,7 @@ export const role_has_perms = {
     review_has_photos: { create: everyone, read: everyone, update: everyone, delete: everyone },
     photos: { create: everyone, read: everyone, update: disabled, delete: everyone },
     reviews: { create: everyone, read: everyone, update: everyone, delete: admin_only },
+    listings: { create: everyone, read: everyone, update: everyone, delete: everyone },
     places: { create: admin_only, read: everyone, update: admin_only, delete: admin_only },
     user_has_roles: {
         create: admin_only,

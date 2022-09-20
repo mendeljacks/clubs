@@ -1,10 +1,11 @@
 import { AppleUser, EnsureAppleUserExistsFn } from 'biab/src/api/auth/auth_apple'
 import { EnsureUserExistsFn, GoogleUser } from 'biab/src/api/auth/auth_google'
+import { add_resource_ids } from 'biab/src/config/extra_macros'
 import { mutate_handler } from 'biab/src/config/orma'
 import { query_handler } from 'biab/src/config/orma'
 import { OrmaSchema } from 'orma/src/introspector/introspector'
 import { orma_schema } from '../../../generated/orma_schema'
-import { pool } from '../../config/pg'
+import { byo_query_fn, pool, trans } from '../../config/pg'
 import { user } from './roles'
 
 export const ensure_user_exists: EnsureUserExistsFn = async (google_user: GoogleUser) => {
@@ -22,7 +23,12 @@ export const ensure_user_exists: EnsureUserExistsFn = async (google_user: Google
         }
     }
 
-    let { users } = (await query_handler(query, pool, orma_schema as any as OrmaSchema)) as any
+    let { users } = (await query_handler(
+        query,
+        pool,
+        orma_schema as any as OrmaSchema,
+        byo_query_fn
+    )) as any
 
     if (users.length > 0) {
         return users[0]
@@ -45,8 +51,20 @@ export const ensure_user_exists: EnsureUserExistsFn = async (google_user: Google
         ]
     }
 
-    await mutate_handler(mutation, pool, orma_schema as any as OrmaSchema)
-    let { users: new_users } = await query_handler(query, pool, orma_schema as any as OrmaSchema)
+    await mutate_handler(
+        mutation,
+        pool,
+        orma_schema as any as OrmaSchema,
+        byo_query_fn,
+        trans,
+        add_resource_ids
+    )
+    let { users: new_users } = await query_handler(
+        query,
+        pool,
+        orma_schema as any as OrmaSchema,
+        byo_query_fn
+    )
     return new_users[0]
 }
 
@@ -65,7 +83,12 @@ export const ensure_apple_user_exists: EnsureAppleUserExistsFn = async (apple_us
         }
     }
 
-    let { users } = (await query_handler(query, pool, orma_schema as any as OrmaSchema)) as any
+    let { users } = (await query_handler(
+        query,
+        pool,
+        orma_schema as any as OrmaSchema,
+        byo_query_fn
+    )) as any
 
     if (users.length > 0) {
         return users[0]
@@ -88,7 +111,19 @@ export const ensure_apple_user_exists: EnsureAppleUserExistsFn = async (apple_us
         ]
     }
 
-    await mutate_handler(mutation, pool, orma_schema as any as OrmaSchema)
-    let { users: new_users } = await query_handler(query, pool, orma_schema as any as OrmaSchema)
+    await mutate_handler(
+        mutation,
+        pool,
+        orma_schema as any as OrmaSchema,
+        byo_query_fn,
+        trans,
+        add_resource_ids
+    )
+    let { users: new_users } = await query_handler(
+        query,
+        pool,
+        orma_schema as any as OrmaSchema,
+        byo_query_fn
+    )
     return new_users[0]
 }
