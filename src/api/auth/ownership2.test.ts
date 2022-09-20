@@ -1,12 +1,12 @@
+import { fake_orma_schema } from 'biab/src/tests/fake_orma_schema'
+import { fake_pool } from 'biab/src/tests/fake_pool'
 import { expect } from 'chai'
 import { describe, test } from 'mocha'
 import { array_equals, clone } from 'orma/src/helpers/helpers'
 import { OrmaSchema } from 'orma/src/introspector/introspector'
 import { WhereConnected } from 'orma/src/types/query/query_types'
-import * as orma from 'biab/src/config/orma'
 import sinon from 'sinon'
-import { fake_pool } from 'biab/src/tests/fake_pool'
-import { fake_orma_schema } from 'biab/src/tests/fake_orma_schema'
+import * as pg from '../../config/pg'
 import { ensure_ownership } from './ownership'
 import { admin, user } from './roles'
 
@@ -151,7 +151,7 @@ describe('Ownership', () => {
         expect(result).to.equal(undefined)
     })
     test('A user can add photos to a review that belongs to them', async () => {
-        sinon.stub(orma, 'byo_query_fn').callsFake(async sqls => {
+        sinon.stub(pg, 'byo_query_fn').callsFake(async sqls => {
             return sqls.map(el => [{ id: 1 }])
         })
         const original_mutation = {
@@ -172,7 +172,7 @@ describe('Ownership', () => {
         expect(result).to.equal(undefined)
     })
     test('A user can not add photos to a review that belongs to someone else', async () => {
-        sinon.stub(orma, 'byo_query_fn').callsFake(async sqls => {
+        sinon.stub(pg, 'byo_query_fn').callsFake(async sqls => {
             return sqls.map(el => [{ id: 2 }])
         })
         const original_mutation = {
