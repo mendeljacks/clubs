@@ -95,7 +95,7 @@ export const orma_schema = {
       }
     ]
   },
-  "users": {
+  "likes": {
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -104,90 +104,51 @@ export const orma_schema = {
       "character_count": 32,
       "default": "BY DEFAULT"
     },
+    "user_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "users": {
+          "id": {}
+        }
+      }
+    },
+    "review_id": {
+      "data_type": "integer",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "reviews": {
+          "id": {}
+        }
+      }
+    },
     "created_at": {
       "data_type": "timestamp without time zone",
-      "ordinal_position": 7,
+      "ordinal_position": 4,
       "not_null": true,
       "decimal_places": 6,
       "default": "now()"
     },
     "updated_at": {
       "data_type": "timestamp without time zone",
-      "ordinal_position": 8,
+      "ordinal_position": 5,
       "not_null": true,
       "decimal_places": 6,
       "default": "now()"
     },
-    "photo_id": {
-      "data_type": "integer",
-      "ordinal_position": 10,
-      "character_count": 32,
-      "references": {
-        "photos": {
-          "id": {}
-        }
-      }
-    },
-    "email": {
-      "data_type": "character varying",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "password": {
-      "data_type": "character varying",
-      "ordinal_position": 3,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "first_name": {
-      "data_type": "character varying",
-      "ordinal_position": 4,
-      "character_count": 10485760
-    },
-    "last_name": {
-      "data_type": "character varying",
-      "ordinal_position": 5,
-      "character_count": 10485760
-    },
-    "phone": {
-      "data_type": "character varying",
-      "ordinal_position": 6,
-      "character_count": 10485760
-    },
     "resource_id": {
       "data_type": "character varying",
-      "ordinal_position": 9,
+      "ordinal_position": 6,
       "not_null": true,
       "character_count": 10485760
     },
     "$indexes": [
       {
-        "index_name": "users_email_uq",
-        "is_unique": true,
-        "fields": [
-          "email"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "users_phone_uq",
-        "is_unique": true,
-        "fields": [
-          "phone"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "users_photo_id_uq",
-        "is_unique": true,
-        "fields": [
-          "photo_id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "users_pkey",
+        "index_name": "likes_pkey",
         "is_unique": true,
         "fields": [
           "id"
@@ -195,7 +156,95 @@ export const orma_schema = {
         "invisible": false
       },
       {
-        "index_name": "users_resource_id_uq",
+        "index_name": "likes_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "likes_user_id_review_id_uq",
+        "is_unique": true,
+        "fields": [
+          "review_id",
+          "user_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "follows": {
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "from_user_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "users": {
+          "id": {}
+        }
+      }
+    },
+    "to_user_id": {
+      "data_type": "integer",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "users": {
+          "id": {}
+        }
+      }
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "follows_from_user_id_to_user_id_uq",
+        "is_unique": true,
+        "fields": [
+          "to_user_id",
+          "from_user_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "follows_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "follows_resource_id_uq",
         "is_unique": true,
         "fields": [
           "resource_id"
@@ -238,11 +287,6 @@ export const orma_schema = {
         }
       }
     },
-    "google_place_id": {
-      "data_type": "character varying",
-      "ordinal_position": 3,
-      "character_count": 10485760
-    },
     "resource_id": {
       "data_type": "character varying",
       "ordinal_position": 6,
@@ -253,6 +297,11 @@ export const orma_schema = {
       "data_type": "character varying",
       "ordinal_position": 2,
       "not_null": true,
+      "character_count": 10485760
+    },
+    "google_place_id": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
       "character_count": 10485760
     },
     "$indexes": [
@@ -349,15 +398,15 @@ export const orma_schema = {
         }
       }
     },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 8,
-      "not_null": true,
-      "character_count": 10485760
-    },
     "comment": {
       "data_type": "character varying",
       "ordinal_position": 5,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 8,
       "not_null": true,
       "character_count": 10485760
     },
@@ -372,6 +421,125 @@ export const orma_schema = {
       },
       {
         "index_name": "reviews_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "users": {
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 7,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 8,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "photo_id": {
+      "data_type": "integer",
+      "ordinal_position": 10,
+      "character_count": 32,
+      "references": {
+        "photos": {
+          "id": {}
+        }
+      }
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 9,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "location": {
+      "data_type": "character varying",
+      "ordinal_position": 11,
+      "character_count": 10485760
+    },
+    "bio": {
+      "data_type": "character varying",
+      "ordinal_position": 12,
+      "character_count": 10000
+    },
+    "email": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "password": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "first_name": {
+      "data_type": "character varying",
+      "ordinal_position": 4,
+      "character_count": 10485760
+    },
+    "last_name": {
+      "data_type": "character varying",
+      "ordinal_position": 5,
+      "character_count": 10485760
+    },
+    "phone": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "users_email_uq",
+        "is_unique": true,
+        "fields": [
+          "email"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "users_phone_uq",
+        "is_unique": true,
+        "fields": [
+          "phone"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "users_photo_id_uq",
+        "is_unique": true,
+        "fields": [
+          "photo_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "users_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "users_resource_id_uq",
         "is_unique": true,
         "fields": [
           "resource_id"
