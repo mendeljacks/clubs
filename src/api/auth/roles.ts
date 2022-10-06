@@ -6,12 +6,23 @@ export const user = populated_data.roles[1].id
 const everyone = [admin, user]
 const admin_only = [admin]
 const disabled = []
+const full_access = { create: everyone, read: everyone, update: everyone, delete: everyone }
+
 export const role_has_perms = {
     migrations: { create: disabled, read: disabled, update: disabled, delete: disabled },
-    review_has_photos: { create: everyone, read: everyone, update: everyone, delete: everyone },
+    review_has_photos: full_access,
+    review_has_types: full_access,
+    services: full_access,
+    categories: full_access,
+    listing_features: full_access,
+    review_types: full_access,
+    service_types: full_access,
+    listing_has_features: full_access,
+    listing_has_photos: full_access,
+    listing_has_categories: full_access,
     photos: { create: everyone, read: everyone, update: disabled, delete: everyone },
     reviews: { create: everyone, read: everyone, update: everyone, delete: admin_only },
-    listings: { create: everyone, read: everyone, update: everyone, delete: everyone },
+    listings: full_access,
     places: { create: admin_only, read: everyone, update: admin_only, delete: admin_only },
     user_has_roles: {
         create: admin_only,
