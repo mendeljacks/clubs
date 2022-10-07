@@ -18,7 +18,14 @@ const add_edges: Edge[] = [
     }
 ]
 
-const remove_edges: Edge[] = []
+const remove_edges: Edge[] = [
+    {
+        to_entity: 'listings',
+        to_field: 'id',
+        from_entity: 'reviews',
+        from_field: 'listing_id'
+    }
+]
 
 export const connection_edges = add_connection_edges(
     remove_connection_edges(baseline_edges, remove_edges),
