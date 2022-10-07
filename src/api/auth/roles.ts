@@ -20,6 +20,8 @@ export const role_has_perms = {
     listing_has_features: full_access,
     listing_has_photos: full_access,
     listing_has_categories: full_access,
+    review_visit_types: full_access,
+    review_has_visit_types: full_access,
     photos: { create: everyone, read: everyone, update: disabled, delete: everyone },
     reviews: { create: everyone, read: everyone, update: everyone, delete: admin_only },
     listings: full_access,
