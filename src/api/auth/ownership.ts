@@ -81,7 +81,15 @@ const get_query_ownership_errors = async (query, token_content: TokenContent): P
     const table_names = get_query_table_names(query)
     if (
         table_names.every((table_name: string) =>
-            ['users', 'user_has_photos', 'photos'].includes(table_name)
+            [
+                'users',
+                'user_has_photos',
+                'photos',
+                'reviews',
+                'review_types',
+                'review_has_photos',
+                'review_has_types'
+            ].includes(table_name)
         )
     ) {
         return []
