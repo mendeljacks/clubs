@@ -1,5 +1,6 @@
 export const orma_schema = {
   "migrations": {
+    "$database_type": "postgres",
     "run_on": {
       "data_type": "timestamp without time zone",
       "ordinal_position": 3,
@@ -31,6 +32,7 @@ export const orma_schema = {
     ]
   },
   "listings": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -96,6 +98,7 @@ export const orma_schema = {
     ]
   },
   "likes": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -175,6 +178,7 @@ export const orma_schema = {
     ]
   },
   "follows": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -254,6 +258,7 @@ export const orma_schema = {
     ]
   },
   "listing_has_photos": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -333,6 +338,7 @@ export const orma_schema = {
     ]
   },
   "review_has_visit_types": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -411,6 +417,7 @@ export const orma_schema = {
     ]
   },
   "listing_has_categories": {
+    "$database_type": "postgres",
     "listing_id": {
       "data_type": "integer",
       "ordinal_position": 2,
@@ -490,6 +497,7 @@ export const orma_schema = {
     ]
   },
   "categories": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -552,6 +560,7 @@ export const orma_schema = {
     ]
   },
   "review_visit_types": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -614,6 +623,7 @@ export const orma_schema = {
     ]
   },
   "services": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -717,6 +727,7 @@ export const orma_schema = {
     ]
   },
   "places": {
+    "$database_type": "postgres",
     "listing_id": {
       "data_type": "integer",
       "ordinal_position": 7,
@@ -811,6 +822,7 @@ export const orma_schema = {
     ]
   },
   "reviews": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -893,6 +905,7 @@ export const orma_schema = {
     ]
   },
   "users": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1017,6 +1030,7 @@ export const orma_schema = {
     ]
   },
   "user_has_roles": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1096,6 +1110,7 @@ export const orma_schema = {
     ]
   },
   "roles": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1158,6 +1173,7 @@ export const orma_schema = {
     ]
   },
   "review_has_photos": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1237,6 +1253,7 @@ export const orma_schema = {
     ]
   },
   "photos": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1299,6 +1316,7 @@ export const orma_schema = {
     ]
   },
   "review_has_types": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1378,6 +1396,7 @@ export const orma_schema = {
     ]
   },
   "review_types": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1440,6 +1459,7 @@ export const orma_schema = {
     ]
   },
   "service_types": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1502,6 +1522,7 @@ export const orma_schema = {
     ]
   },
   "listing_has_features": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1581,6 +1602,7 @@ export const orma_schema = {
     ]
   },
   "listing_features": {
+    "$database_type": "postgres",
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
