@@ -1,6 +1,6 @@
 {
     "name": "clubs",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "",
     "main": "build/index.js",
     "scripts": {
@@ -41,14 +41,9 @@
         "@fastify/cors": "^8.1.0",
         "@fastify/formbody": "^7.2.0",
         "@malept/cross-spawn-promise": "^2.0.0",
-        "ajv": "^8.11.0",
-        "axios": "^0.27.2",
-        "bcrypt": "^5.0.1",
-        "biab": "^1.0.28",
+        "biab": "^1.0.29",
         "cuid": "^2.1.8",
         "fastify": "^4.5.3",
-        "jsonwebtoken": "^8.5.1",
-        "next-auth": "^4.10.3",
         "orma": "^1.0.149",
         "pg": "^8.8.0",
         "ts-node": "^10.9.1"
