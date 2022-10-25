@@ -329,6 +329,25 @@
             "endpoint": "https://test.clubsapp.net/query",
             "testScript": "",
             "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjE3OTQwNjl9.3ildSGYabPhH06t0TE_IeLG_vju7_wtn8wFwvCln58I",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n    \"reviews\": {\n        \"$offset\": 0,\n        \"$limit\": 2,\n        \"$where\": {\n            \"$eq\": [\n                \"user_id\",\n                {\n                    \"$escape\": 6\n                }\n            ]\n        },\n        \"id\": true,\n        \"listing_id\": true,\n        \"created_at\": true,\n        \"rating\": true,\n        \"comment\": true,\n        \"review_has_types\": {\n            \"id\": true,\n            \"review_type_id\": true,\n            \"review_types\": {\n                \"id\": true,\n                \"name\": true\n            }\n        },\n        \"$select\": [\n            {\n                \"$as\": [\n                    {\n                        \"$select\": [\n                            {\n                                \"$count\": \"*\"\n                            }\n                        ],\n                        \"$from\": \"likes\",\n                        \"$where\": {\n                            \"$eq\": [\n                                \"review_id\",\n                                {\n                                    \"$entity\": \"reviews\",\n                                    \"$field\": \"id\"\n                                }\n                            ]\n                        }\n                    },\n                    \"likes_count\"\n                ]\n            }\n        ],\n        \"users\": {\n            \"id\": true,\n            \"email\": true,\n            \"first_name\": true,\n            \"last_name\": true,\n            \"photos\": {\n                \"id\": true,\n                \"url\": true\n            }\n        }\n    }\n}\n",
+                "contentType": "application/json"
+            },
+            "name": "List all reviews for a single user",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "https://test.clubsapp.net/query",
+            "testScript": "",
+            "preRequestScript": ""
         }
     ]
 }
