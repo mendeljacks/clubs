@@ -86,6 +86,7 @@ const get_query_ownership_errors = async (query, token_content: TokenContent): P
                 'user_has_photos',
                 'photos',
                 'reviews',
+                'likes',
                 'review_types',
                 'review_has_photos',
                 'review_has_types'
