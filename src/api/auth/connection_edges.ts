@@ -30,6 +30,18 @@ const remove_edges: Edge[] = [
         from_field: 'review_id',
         to_entity: 'reviews',
         to_field: 'id'
+    },
+    {
+        from_entity: 'follows',
+        from_field: 'from_user_id',
+        to_entity: 'users',
+        to_field: 'id'
+    },
+    {
+        from_entity: 'follows',
+        from_field: 'to_user_id',
+        to_entity: 'users',
+        to_field: 'id'
     }
 ]
 
