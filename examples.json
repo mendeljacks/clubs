@@ -348,6 +348,25 @@
             "endpoint": "https://test.clubsapp.net/query",
             "testScript": "",
             "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjE3OTQwNjl9.3ildSGYabPhH06t0TE_IeLG_vju7_wtn8wFwvCln58I",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n    \"users\": {\n        \"id\": true,\n        \"email\": true,\n        \"first_name\": true,\n        \"last_name\": true,\n        \"phone\": true,\n        \"photos\": {\n            \"url\": true\n        },\n        \"$where\": {\n           \"$any_path\": [[\"reviews\", \"listings\"], {\n            \"$eq\": [\"id\", {\"$escape\": 214}]\n           }]\n        },\n        \"$offset\": 0,\n        \"$limit\": 10\n    }\n}\n",
+                "contentType": "application/json"
+            },
+            "name": "List friends reviews",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "https://test.clubsapp.net/query",
+            "testScript": "",
+            "preRequestScript": ""
         }
     ]
 }
