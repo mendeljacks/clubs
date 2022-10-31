@@ -1,18 +1,18 @@
 export const orma_schema = {
   "migrations": {
     "$database_type": "postgres",
-    "run_on": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 3,
-      "not_null": true,
-      "decimal_places": 6
-    },
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
       "not_null": true,
       "character_count": 32,
       "default": "nextval('migrations_id_seq'::regclass)"
+    },
+    "run_on": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 3,
+      "not_null": true,
+      "decimal_places": 6
     },
     "name": {
       "data_type": "character varying",
@@ -92,6 +92,175 @@ export const orma_schema = {
         "is_unique": true,
         "fields": [
           "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "service_categories": {
+    "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "image_id": {
+      "data_type": "integer",
+      "ordinal_position": 3,
+      "character_count": 32,
+      "references": {
+        "photos": {
+          "id": {}
+        }
+      }
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 6,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "name": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 7,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "service_categories_image_light_id_uq",
+        "is_unique": true,
+        "fields": [
+          "image_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_categories_name_uq",
+        "is_unique": true,
+        "fields": [
+          "name"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_categories_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_categories_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "service_has_categories": {
+    "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "service_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "services": {
+          "id": {}
+        }
+      }
+    },
+    "service_category_id": {
+      "data_type": "integer",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "service_categories": {
+          "id": {}
+        }
+      }
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "service_has_categories_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_has_categories_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_has_categories_service_id_uq",
+        "is_unique": true,
+        "fields": [
+          "service_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_has_categories_service_type_id_service_id_uq",
+        "is_unique": true,
+        "fields": [
+          "service_category_id",
+          "service_id"
         ],
         "invisible": false
       }
@@ -249,6 +418,126 @@ export const orma_schema = {
       },
       {
         "index_name": "follows_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "services": {
+    "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "listing_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "listings": {
+          "id": {}
+        }
+      }
+    },
+    "price_level": {
+      "data_type": "integer",
+      "ordinal_position": 8,
+      "character_count": 32
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 9,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 10,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "name": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "city": {
+      "data_type": "character varying",
+      "ordinal_position": 5,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "website": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "character_count": 10485760
+    },
+    "phone": {
+      "data_type": "character varying",
+      "ordinal_position": 7,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 11,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "instagram": {
+      "data_type": "character varying",
+      "ordinal_position": 12
+    },
+    "facebook": {
+      "data_type": "character varying",
+      "ordinal_position": 13
+    },
+    "telegram": {
+      "data_type": "character varying",
+      "ordinal_position": 14
+    },
+    "linkedin": {
+      "data_type": "character varying",
+      "ordinal_position": 15
+    },
+    "tiktok": {
+      "data_type": "character varying",
+      "ordinal_position": 16
+    },
+    "type": {
+      "data_type": "character varying",
+      "ordinal_position": 17,
+      "character_count": 300
+    },
+    "$indexes": [
+      {
+        "index_name": "services_listing_id_uq",
+        "is_unique": true,
+        "fields": [
+          "listing_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "services_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "services_resource_id_uq",
         "is_unique": true,
         "fields": [
           "resource_id"
@@ -418,6 +707,14 @@ export const orma_schema = {
   },
   "listing_has_categories": {
     "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
     "listing_id": {
       "data_type": "integer",
       "ordinal_position": 2,
@@ -428,14 +725,6 @@ export const orma_schema = {
           "id": {}
         }
       }
-    },
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
     },
     "category_id": {
       "data_type": "integer",
@@ -583,15 +872,15 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 5,
-      "not_null": true,
-      "character_count": 10485760
-    },
     "name": {
       "data_type": "character varying",
       "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 5,
       "not_null": true,
       "character_count": 10485760
     },
@@ -622,197 +911,8 @@ export const orma_schema = {
       }
     ]
   },
-  "service_has_types": {
-    "$database_type": "postgres",
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "service_id": {
-      "data_type": "integer",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "services": {
-          "id": {}
-        }
-      }
-    },
-    "service_type_id": {
-      "data_type": "integer",
-      "ordinal_position": 3,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "service_types": {
-          "id": {}
-        }
-      }
-    },
-    "created_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 4,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 5,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 6,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "$indexes": [
-      {
-        "index_name": "service_has_types_pkey",
-        "is_unique": true,
-        "fields": [
-          "id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "service_has_types_resource_id_uq",
-        "is_unique": true,
-        "fields": [
-          "resource_id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "service_has_types_service_type_id_service_id_uq",
-        "is_unique": true,
-        "fields": [
-          "service_type_id",
-          "service_id"
-        ],
-        "invisible": false
-      }
-    ]
-  },
-  "services": {
-    "$database_type": "postgres",
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "listing_id": {
-      "data_type": "integer",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "listings": {
-          "id": {}
-        }
-      }
-    },
-    "price_level": {
-      "data_type": "integer",
-      "ordinal_position": 8,
-      "not_null": true,
-      "character_count": 32
-    },
-    "created_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 9,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 10,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "provider_name": {
-      "data_type": "character varying",
-      "ordinal_position": 3,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "city": {
-      "data_type": "character varying",
-      "ordinal_position": 5,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "website": {
-      "data_type": "character varying",
-      "ordinal_position": 6,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "phone": {
-      "data_type": "character varying",
-      "ordinal_position": 7,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 11,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "$indexes": [
-      {
-        "index_name": "services_listing_id_uq",
-        "is_unique": true,
-        "fields": [
-          "listing_id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "services_pkey",
-        "is_unique": true,
-        "fields": [
-          "id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "services_resource_id_uq",
-        "is_unique": true,
-        "fields": [
-          "resource_id"
-        ],
-        "invisible": false
-      }
-    ]
-  },
   "places": {
     "$database_type": "postgres",
-    "listing_id": {
-      "data_type": "integer",
-      "ordinal_position": 7,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "listings": {
-          "id": {}
-        }
-      }
-    },
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -834,6 +934,17 @@ export const orma_schema = {
       "not_null": true,
       "decimal_places": 6,
       "default": "now()"
+    },
+    "listing_id": {
+      "data_type": "integer",
+      "ordinal_position": 7,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "listings": {
+          "id": {}
+        }
+      }
     },
     "name": {
       "data_type": "character varying",
@@ -851,6 +962,11 @@ export const orma_schema = {
       "ordinal_position": 6,
       "not_null": true,
       "character_count": 10485760
+    },
+    "city": {
+      "data_type": "character varying",
+      "ordinal_position": 8,
+      "character_count": 100
     },
     "$indexes": [
       {
@@ -897,25 +1013,6 @@ export const orma_schema = {
   },
   "reviews": {
     "$database_type": "postgres",
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "user_id": {
-      "data_type": "integer",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "users": {
-          "id": {}
-        }
-      }
-    },
     "rating": {
       "data_type": "integer",
       "ordinal_position": 4,
@@ -943,6 +1040,25 @@ export const orma_schema = {
       "character_count": 32,
       "references": {
         "listings": {
+          "id": {}
+        }
+      }
+    },
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "user_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "users": {
           "id": {}
         }
       }
@@ -1012,17 +1128,6 @@ export const orma_schema = {
         }
       }
     },
-    "password": {
-      "data_type": "character varying",
-      "ordinal_position": 3,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "first_name": {
-      "data_type": "character varying",
-      "ordinal_position": 4,
-      "character_count": 10485760
-    },
     "last_name": {
       "data_type": "character varying",
       "ordinal_position": 5,
@@ -1058,6 +1163,17 @@ export const orma_schema = {
       "data_type": "character varying",
       "ordinal_position": 2,
       "not_null": true,
+      "character_count": 10485760
+    },
+    "password": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "first_name": {
+      "data_type": "character varying",
+      "ordinal_position": 4,
       "character_count": 10485760
     },
     "$indexes": [
@@ -1389,71 +1505,19 @@ export const orma_schema = {
       }
     ]
   },
-  "service_types": {
-    "$database_type": "postgres",
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "created_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 3,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 4,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "name": {
-      "data_type": "character varying",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 5,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "$indexes": [
-      {
-        "index_name": "service_types_name_uq",
-        "is_unique": true,
-        "fields": [
-          "name"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "service_types_pkey",
-        "is_unique": true,
-        "fields": [
-          "id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "service_types_resource_id_uq",
-        "is_unique": true,
-        "fields": [
-          "resource_id"
-        ],
-        "invisible": false
-      }
-    ]
-  },
   "review_has_types": {
     "$database_type": "postgres",
+    "review_type_id": {
+      "data_type": "integer",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "review_types": {
+          "id": {}
+        }
+      }
+    },
     "id": {
       "data_type": "integer",
       "ordinal_position": 1,
@@ -1469,17 +1533,6 @@ export const orma_schema = {
       "character_count": 32,
       "references": {
         "reviews": {
-          "id": {}
-        }
-      }
-    },
-    "review_type_id": {
-      "data_type": "integer",
-      "ordinal_position": 3,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "review_types": {
           "id": {}
         }
       }
@@ -1556,15 +1609,15 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 5,
-      "not_null": true,
-      "character_count": 10485760
-    },
     "name": {
       "data_type": "character varying",
       "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 5,
       "not_null": true,
       "character_count": 10485760
     },
@@ -1699,15 +1752,15 @@ export const orma_schema = {
       "decimal_places": 6,
       "default": "now()"
     },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 5,
-      "not_null": true,
-      "character_count": 10485760
-    },
     "name": {
       "data_type": "character varying",
       "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 5,
       "not_null": true,
       "character_count": 10485760
     },
@@ -1733,6 +1786,309 @@ export const orma_schema = {
         "is_unique": true,
         "fields": [
           "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "service_has_features": {
+    "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "service_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "services": {
+          "id": {}
+        }
+      }
+    },
+    "service_feature_id": {
+      "data_type": "integer",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "service_features": {
+          "id": {}
+        }
+      }
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "service_has_types_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_has_types_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_has_types_service_type_id_service_id_uq",
+        "is_unique": true,
+        "fields": [
+          "service_feature_id",
+          "service_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "service_features": {
+    "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 3,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "name": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 5,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "service_types_name_uq",
+        "is_unique": true,
+        "fields": [
+          "name"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_types_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_types_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "service_has_photos": {
+    "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "service_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "services": {
+          "id": {}
+        }
+      }
+    },
+    "photo_id": {
+      "data_type": "integer",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "photos": {
+          "id": {}
+        }
+      }
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "service_has_photos_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_has_photos_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "service_has_photos_service_id_photo_id_uq",
+        "is_unique": true,
+        "fields": [
+          "photo_id",
+          "service_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "favorites": {
+    "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "listing_id": {
+      "data_type": "integer",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "listings": {
+          "id": {}
+        }
+      }
+    },
+    "user_id": {
+      "data_type": "integer",
+      "ordinal_position": 3,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "users": {
+          "id": {}
+        }
+      }
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "$indexes": [
+      {
+        "index_name": "favorites_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "favorites_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "favorites_user_id_listing_id_uq",
+        "is_unique": true,
+        "fields": [
+          "user_id",
+          "listing_id"
         ],
         "invisible": false
       }
