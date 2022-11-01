@@ -32,6 +32,7 @@ export const role_has_perms = {
     service_has_features: full_access,
     service_has_categories: full_access,
     listing_has_features: full_access,
+    favorites: full_access,
     listing_has_photos: full_access,
     listing_has_categories: full_access,
     review_visit_types: full_access,
