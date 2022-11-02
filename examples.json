@@ -14,7 +14,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/auth/google/headless",
+            "endpoint": "<<base_url>>/auth/google/headless",
             "testScript": "\n\n// Set an environment variable\npw.env.set(\"token\", pw.response.body.token);",
             "preRequestScript": ""
         },
@@ -26,7 +26,7 @@
             "method": "GET",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/auth/google/login",
+            "endpoint": "<<base_url>>/auth/google/login",
             "testScript": "\n\n// Set an environment variable\npw.env.set(\"token\", pw.response.body.token);",
             "preRequestScript": ""
         },
@@ -45,7 +45,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/mutate",
+            "endpoint": "<<base_url>>/mutate",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -64,7 +64,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -79,7 +79,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/auth/apple/headless",
+            "endpoint": "<<base_url>>/auth/apple/headless",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -98,7 +98,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "http://localhost:3001/mutate",
+            "endpoint": "<<base_url>>/mutate",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -110,14 +110,14 @@
                 "authActive": true
             },
             "body": {
-                "body": "{\n  \"$operation\": \"create\",\n  \"places\": [{\n    \"name\": \"Ivan test\",\n    \"google_place_id\": \"12345asd\",\n    \"listings\": [{\n      \"description\": \"hi\",\n      \"user_id\": 5\n    }]\n  }]\n}",
+                "body": "{\n  \"$operation\": \"create\",\n  \"services\": [{\n    \"name\": \"Ivan test\",\n    \"city\": \"Montreal\",\n    \"website\": \"google.com\",\n    \"phone\": \"123123123\",\n    \"price_level\": 3,\n    \"instagram\": \"my_insta\",\n    \"facebook\": \"my_facebook\",\n    \"telegram\": \"my_telegram\",\n    \"linkedin\": \"my_linkdn\",\n    \"tiktok\": \"my_tiktok\",\n    \"type\": \"my_type\",\n    \"listings\": [{\"description\": \"hi\",\"user_id\": 5}],\n    \"service_has_features\": [{ \"service_feature_id\": 1 }],\n    \"service_has_photos\": [{\"photos\": [{\"url\": \"test2\"}]}],\n    \"service_has_categories\": [{\"service_category_id\": 1}]\n  }]\n}",
                 "contentType": "application/json"
             },
             "name": "Create a Place",
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/mutate",
+            "endpoint": "<<base_url>>/mutate",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -136,7 +136,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -148,14 +148,14 @@
                 "authActive": true
             },
             "body": {
-                "body": "{\n      \"places\": {\n        \"id\": true,\n        \"google_place_id\": true,\n        \"$order_by\": [\n          {\"$desc\": \"created_at\"}\n        ],\n        \"$offset\": 0,\n        \"$limit\": 100,\n        \"listings\": {\n          \"id\": true,\n          \"user_id\": true,\n          \"reviews\": {\n            \"id\": true, \n            \"listing_id\": true\n          }\n        }\n      }\n    }",
+                "body": "{\n      \"places\": {\n        \"id\": true,\n        \"google_place_id\": true,\n        \"$order_by\": [\n          {\"$desc\": \"created_at\"}\n        ],\n        \"$offset\": 0,\n        \"$limit\": 100,\n        \"listings\": {\n          \"id\": true,\n          \"user_id\": true,\n          \"favorites\": {\n           \t\"id\": true \n          },\n          \"reviews\": {\n            \"id\": true, \n            \"listing_id\": true\n          }\n        }\n      }\n    }",
                 "contentType": "application/json"
             },
             "name": "List places",
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -174,7 +174,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/mutate",
+            "endpoint": "<<base_url>>/mutate",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -193,7 +193,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/mutate",
+            "endpoint": "<<base_url>>/mutate",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -212,26 +212,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
-            "testScript": "",
-            "preRequestScript": ""
-        },
-        {
-            "v": "1",
-            "auth": {
-                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjE3OTQwNjl9.3ildSGYabPhH06t0TE_IeLG_vju7_wtn8wFwvCln58I",
-                "authType": "bearer",
-                "authActive": true
-            },
-            "body": {
-                "body": "{\n  \"reviews\": {\n    \"$offset\": 0,\n    \"$limit\": 10,\n    \"id\": true,\n    \"listing_id\": true,\n    \"created_at\": true,\n    \"rating\": true,\n    \"comment\": true,\n    \"review_has_types\": {\n      \"id\": true,\n      \"review_type_id\": true,\n      \"review_types\": {\n        \"id\": true,\n        \"name\": true\n      }\n    },\n    \"$select\": [\n      {\n        \"$as\": [\n          {\n            \"$select\": [\n              {\n                \"$count\": \"*\"\n              }\n            ],\n            \"$from\": \"likes\",\n            \"$where\": {\n              \"$and\": [\n                {\n                  \"$eq\": [\n                    \"review_id\",\n                    {\n                      \"$entity\": \"reviews\",\n                      \"$field\": \"id\"\n                    }\n                  ]\n                }\n              ]\n            }\n          },\n          \"has_liked\"\n        ]\n      },\n      {\n        \"$as\": [\n          {\n            \"$select\": [\n              {\n                \"$count\": \"*\"\n              }\n            ],\n            \"$from\": \"likes\",\n            \"$where\": {\n              \"$eq\": [\n                \"review_id\",\n                {\n                  \"$entity\": \"reviews\",\n                  \"$field\": \"id\"\n                }\n              ]\n            }\n          },\n          \"likes_count\"\n        ]\n      }\n    ],\n    \"created_by\": {\n      \"$from\": \"users\",\n      \"id\": true,\n      \"email\": true,\n      \"first_name\": true,\n      \"last_name\": true,\n      \"photos\": {\n        \"id\": true,\n        \"url\": true\n      }\n    }\n  }\n}",
-                "contentType": "application/json"
-            },
-            "name": "List reviews - Дублировать",
-            "method": "POST",
-            "params": [],
-            "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -250,7 +231,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/mutate",
+            "endpoint": "<<base_url>>/mutate",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -269,7 +250,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -288,7 +269,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -307,7 +288,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "http://localhost:3001/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -326,7 +307,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -345,7 +326,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -364,7 +345,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/query",
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         },
@@ -383,7 +364,64 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://test.clubsapp.net/mutate",
+            "endpoint": "<<base_url>>/mutate",
+            "testScript": "",
+            "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjE3OTQwNjl9.3ildSGYabPhH06t0TE_IeLG_vju7_wtn8wFwvCln58I",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n  \"$operation\": \"create\",\n  \"favorites\": [{\n    \"user_id\": 5,\n    \"listing_id\": 300\n  }]\n}",
+                "contentType": "application/json"
+            },
+            "name": "Favorite a listing",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "<<base_url>>/mutate",
+            "testScript": "",
+            "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjE3OTQwNjl9.3ildSGYabPhH06t0TE_IeLG_vju7_wtn8wFwvCln58I",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n  \"$operation\": \"delete\",\n  \"favorites\": [{\n    \"user_id\": 5,\n    \"listing_id\": 300\n  }]\n}",
+                "contentType": "application/json"
+            },
+            "name": "Favorite a listing",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "<<base_url>>/mutate",
+            "testScript": "",
+            "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjE3OTQwNjl9.3ildSGYabPhH06t0TE_IeLG_vju7_wtn8wFwvCln58I",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n  \"favorites\": {\n    \"user_id\": true,\n    \"listing_id\": true\n  }\n}",
+                "contentType": "application/json"
+            },
+            "name": "Get favorites for a user",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
         }

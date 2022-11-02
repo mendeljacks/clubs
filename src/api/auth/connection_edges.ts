@@ -36,6 +36,12 @@ const remove_edges: Edge[] = [
         from_field: 'to_user_id',
         to_entity: 'users',
         to_field: 'id'
+    },
+    {
+        from_entity: 'favorites',
+        from_field: 'listing_id',
+        to_entity: 'listings',
+        to_field: 'id'
     }
 ]
 
