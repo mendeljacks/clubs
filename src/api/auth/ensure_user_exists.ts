@@ -6,6 +6,7 @@ import { query_handler } from 'biab/src/config/orma'
 import { OrmaSchema } from 'orma/src/introspector/introspector'
 import { orma_schema } from '../../../generated/orma_schema'
 import { byo_query_fn, pool, trans } from '../../config/pg'
+import { connection_edges } from './connection_edges'
 import { user } from './roles'
 
 export const ensure_user_exists: EnsureUserExistsFn = async (google_user: GoogleUser) => {
@@ -27,7 +28,8 @@ export const ensure_user_exists: EnsureUserExistsFn = async (google_user: Google
         query,
         pool,
         orma_schema as any as OrmaSchema,
-        byo_query_fn
+        byo_query_fn,
+        connection_edges
     )) as any
 
     if (users.length > 0) {
@@ -63,7 +65,8 @@ export const ensure_user_exists: EnsureUserExistsFn = async (google_user: Google
         query,
         pool,
         orma_schema as any as OrmaSchema,
-        byo_query_fn
+        byo_query_fn,
+        connection_edges
     )
     return new_users[0]
 }
@@ -87,7 +90,8 @@ export const ensure_apple_user_exists: EnsureAppleUserExistsFn = async (apple_us
         query,
         pool,
         orma_schema as any as OrmaSchema,
-        byo_query_fn
+        byo_query_fn,
+        connection_edges
     )) as any
 
     if (users.length > 0) {
@@ -123,7 +127,8 @@ export const ensure_apple_user_exists: EnsureAppleUserExistsFn = async (apple_us
         query,
         pool,
         orma_schema as any as OrmaSchema,
-        byo_query_fn
+        byo_query_fn,
+        connection_edges
     )
     return new_users[0]
 }
