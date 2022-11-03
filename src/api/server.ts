@@ -24,7 +24,7 @@ import { add_resource_ids } from 'biab/src/config/extra_macros'
 
 export const start = async () => {
     const orma_schema = await introspect('./generated/orma_schema.ts', pool, byo_query_fn)
-    await prepopulate(populated_data, pool, orma_schema, byo_query_fn, trans)
+    await prepopulate(populated_data, pool, orma_schema, byo_query_fn, trans, connection_edges)
 
     const app = Fastify()
     await app.register(cors)
