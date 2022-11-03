@@ -13,6 +13,34 @@ import { TokenContent } from 'biab/src/api/auth/auth'
 import { Pool } from 'biab/src/config/orma'
 import { byo_query_fn } from '../../config/pg'
 
+const publicly_readable = [
+    'categories',
+    'likes',
+    'listing_features',
+    'listing_has_categories',
+    'listing_has_features',
+    'listing_has_photos',
+    'listings',
+    'photos',
+    'places',
+    'review_has_photos',
+    'review_has_types',
+    'review_has_visit_types',
+    'review_types',
+    'review_types',
+    'review_visit_types',
+    'reviews',
+    'service_categories',
+    'service_features',
+    'service_has_categories',
+    'service_has_category',
+    'service_has_features',
+    'service_has_photos',
+    'services',
+    'user_has_photos',
+    'users'
+]
+
 export const ensure_ownership = async (
     query,
     token_content: TokenContent,
@@ -79,23 +107,7 @@ const get_query_table_names = (query: OrmaQuery<any>): string[] => {
 type Error = { message: string }
 const get_query_ownership_errors = async (query, token_content: TokenContent): Promise<Error[]> => {
     const table_names = get_query_table_names(query)
-    if (
-        table_names.every((table_name: string) =>
-            [
-                'users',
-                'user_has_photos',
-                'photos',
-                'reviews',
-                'listings',
-                'places',
-                'services',
-                'likes',
-                'review_types',
-                'review_has_photos',
-                'review_has_types'
-            ].includes(table_name)
-        )
-    ) {
+    if (table_names.every((table_name: string) => publicly_readable.includes(table_name))) {
         return []
     }
 
