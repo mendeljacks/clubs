@@ -424,6 +424,25 @@
             "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjE3OTQwNjl9.3ildSGYabPhH06t0TE_IeLG_vju7_wtn8wFwvCln58I",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n      \"listings\": {\n        \"id\": true,\n        \"created_at\": true,\n        \"$select\": [\n            { \"$as\": [\n                    {\n                        \"$select\": [{\"$coalesce\": [{\"$round\": [{\"$avg\": \"rating\"}, 0]}, 0]}],\n                        \"$from\": \"reviews\",\n                        \"$where\":                         \n                          \t{\"$eq\": [\n                              {\"$entity\": \"listings\",\"$field\": \"id\"},\n                              {\"$entity\": \"reviews\",\"$field\": \"listing_id\"}\n                            ]}\n                      \n                    },\n                    \"rating\"\n                ]\n            }\n        ],\n        \"$order_by\": [{\"$desc\": \"rating\"}],\n        \"$offset\": 0,\n        \"$limit\": 100\n      }\n    }",
+                "contentType": "application/json"
+            },
+            "name": "Sort listings by rating",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "<<base_url>>/query",
+            "testScript": "",
+            "preRequestScript": ""
         }
     ]
 }
