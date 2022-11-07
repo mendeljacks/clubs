@@ -398,7 +398,7 @@
                 "body": "{\n  \"$operation\": \"delete\",\n  \"favorites\": [{\n    \"user_id\": 5,\n    \"listing_id\": 300\n  }]\n}",
                 "contentType": "application/json"
             },
-            "name": "Favorite a listing",
+            "name": "un-favorite a listing",
             "method": "POST",
             "params": [],
             "headers": [],
@@ -456,6 +456,25 @@
                 "contentType": "application/json"
             },
             "name": "Fetch multiple listings with user icons",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "<<base_url>>/query",
+            "testScript": "",
+            "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjE3OTQwNjl9.3ildSGYabPhH06t0TE_IeLG_vju7_wtn8wFwvCln58I",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n  \"listings\": {\n    \"id\": true,\n    \"$offset\": 0,\n    \"places\": {\n      \"google_place_id\": true\n    },\n    \"services\": {\n      \"id\": true\n    },\n    \"$select\": [{\n\t\t\"$as\": [{\n          \"$select\": [\"created_at\"],\n          \"$from\": \"favorites\",\n          \"$where\": {\n            \"$and\": [\n            {\"$eq\": [\"listing_id\", {\"$entity\": \"listings\",\"$field\": \"id\"}]},\n            {\"$eq\": [\"user_id\",{\"$escape\": 7}]} \n            ]\n          \t\n\t\t\t}}, \n          \"date_favorited\"\n      ]}],\n    \"$order_by\": [{\"$asc\": \"date_favorited\"}],\n    \"$where\": {\n      \"$any_path\": [\n        [\"favorites\"],\n        {\"$eq\": [\"user_id\",{\"$escape\": 7}]}\n      ]\n    }\n  }\n}\n\n\n\n\n",
+                "contentType": "application/json"
+            },
+            "name": "Listings sorted by date of recommendation being favorited",
             "method": "POST",
             "params": [],
             "headers": [],
