@@ -519,6 +519,25 @@
             "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjgxNjY0NjB9.Ouh04GSt-g4d_JuU1YfKmBM9zj1j_KungV-_s7vwRHo",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n \"listings\": {\n        \"id\": true,\n        \"services\": {\"id\": true,\"service_has_categories\": {\"id\": true, \"service_id\": true, \"service_category_id\": true}},\n        \"$where\": {\n          \"$in\": [\"user_id\", {\n            \"$select\": [\"to_user_id\"],\n            \"$from\": \"follows\",\n            \"$where\": {\n              \"$eq\": [\"from_user_id\", {\"$escape\": 6}]\n              \n            \n            }\n          }]\n        },\n        \"$offset\": 0,\n        \"$limit\": 100\n}    \n}\n   ",
+                "contentType": "application/json"
+            },
+            "name": "Filter listings by user following",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "<<base_url>>/query",
+            "testScript": "",
+            "preRequestScript": ""
         }
     ]
 }
