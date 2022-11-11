@@ -538,6 +538,25 @@
             "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjgxNjY0NjB9.Ouh04GSt-g4d_JuU1YfKmBM9zj1j_KungV-_s7vwRHo",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n  \"$operation\": \"create\",\n  \"places\": [{\n    \"name\": \"Ivan test3\",\n    \"location\": \"POINT(2.1701 41.387)\",\n    \"google_place_id\": \"12345asd2\",\n    \"listings\": [{\n      \"description\": \"hi\",\n      \"user_id\": 6\n    }]\n  }]\n}",
+                "contentType": "application/json"
+            },
+            "name": "Add a place with a latlng",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "<<base_url>>/mutate",
+            "testScript": "",
+            "preRequestScript": ""
         }
     ]
 }

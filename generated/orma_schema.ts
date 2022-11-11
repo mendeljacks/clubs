@@ -912,106 +912,6 @@ export const orma_schema = {
       }
     ]
   },
-  "places": {
-    "$database_type": "postgres",
-    "id": {
-      "data_type": "integer",
-      "ordinal_position": 1,
-      "not_null": true,
-      "primary_key": true,
-      "character_count": 32,
-      "default": "BY DEFAULT"
-    },
-    "name": {
-      "data_type": "character varying",
-      "ordinal_position": 2,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "google_place_id": {
-      "data_type": "character varying",
-      "ordinal_position": 3,
-      "character_count": 10485760
-    },
-    "created_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 4,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "updated_at": {
-      "data_type": "timestamp without time zone",
-      "ordinal_position": 5,
-      "not_null": true,
-      "decimal_places": 6,
-      "default": "now()"
-    },
-    "resource_id": {
-      "data_type": "character varying",
-      "ordinal_position": 6,
-      "not_null": true,
-      "character_count": 10485760
-    },
-    "listing_id": {
-      "data_type": "integer",
-      "ordinal_position": 7,
-      "not_null": true,
-      "character_count": 32,
-      "references": {
-        "listings": {
-          "id": {}
-        }
-      }
-    },
-    "city": {
-      "data_type": "character varying",
-      "ordinal_position": 8,
-      "character_count": 100
-    },
-    "$indexes": [
-      {
-        "index_name": "places_google_place_id_uq",
-        "is_unique": true,
-        "fields": [
-          "google_place_id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "places_listing_id_uq",
-        "is_unique": true,
-        "fields": [
-          "listing_id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "places_name_uq",
-        "is_unique": true,
-        "fields": [
-          "name"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "places_pkey",
-        "is_unique": true,
-        "fields": [
-          "id"
-        ],
-        "invisible": false
-      },
-      {
-        "index_name": "places_resource_id_uq",
-        "is_unique": true,
-        "fields": [
-          "resource_id"
-        ],
-        "invisible": false
-      }
-    ]
-  },
   "reviews": {
     "$database_type": "postgres",
     "id": {
@@ -1212,6 +1112,110 @@ export const orma_schema = {
       },
       {
         "index_name": "users_resource_id_uq",
+        "is_unique": true,
+        "fields": [
+          "resource_id"
+        ],
+        "invisible": false
+      }
+    ]
+  },
+  "places": {
+    "$database_type": "postgres",
+    "id": {
+      "data_type": "integer",
+      "ordinal_position": 1,
+      "not_null": true,
+      "primary_key": true,
+      "character_count": 32,
+      "default": "BY DEFAULT"
+    },
+    "name": {
+      "data_type": "character varying",
+      "ordinal_position": 2,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "google_place_id": {
+      "data_type": "character varying",
+      "ordinal_position": 3,
+      "character_count": 10485760
+    },
+    "created_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 4,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "updated_at": {
+      "data_type": "timestamp without time zone",
+      "ordinal_position": 5,
+      "not_null": true,
+      "decimal_places": 6,
+      "default": "now()"
+    },
+    "resource_id": {
+      "data_type": "character varying",
+      "ordinal_position": 6,
+      "not_null": true,
+      "character_count": 10485760
+    },
+    "listing_id": {
+      "data_type": "integer",
+      "ordinal_position": 7,
+      "not_null": true,
+      "character_count": 32,
+      "references": {
+        "listings": {
+          "id": {}
+        }
+      }
+    },
+    "city": {
+      "data_type": "character varying",
+      "ordinal_position": 8,
+      "character_count": 100
+    },
+    "location": {
+      "data_type": "user-defined",
+      "ordinal_position": 9
+    },
+    "$indexes": [
+      {
+        "index_name": "places_google_place_id_uq",
+        "is_unique": true,
+        "fields": [
+          "google_place_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "places_listing_id_uq",
+        "is_unique": true,
+        "fields": [
+          "listing_id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "places_name_uq",
+        "is_unique": true,
+        "fields": [
+          "name"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "places_pkey",
+        "is_unique": true,
+        "fields": [
+          "id"
+        ],
+        "invisible": false
+      },
+      {
+        "index_name": "places_resource_id_uq",
         "is_unique": true,
         "fields": [
           "resource_id"
