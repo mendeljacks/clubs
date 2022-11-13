@@ -595,6 +595,25 @@
             "endpoint": "<<base_url>>/query",
             "testScript": "",
             "preRequestScript": ""
+        },
+        {
+            "v": "1",
+            "auth": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJyb2xlX2lkcyI6WzJdLCJpYXQiOjE2NjgxNjY0NjB9.Ouh04GSt-g4d_JuU1YfKmBM9zj1j_KungV-_s7vwRHo",
+                "authType": "bearer",
+                "authActive": true
+            },
+            "body": {
+                "body": "{\n    \"$operation\": \"update\",\n    \"services\": [{\n      \"id\": 36,\n      \"$supersede\": [\"service_has_categories\", \"service_has_features\"],\n      \"service_has_categories\": [\n        {\"service_category_id\": 2}\n      ],\n      \n      \"name\": \"test update service name\",\n      \"type\": \"test update service type\",\n      \n      \"city\": \"test update service city\",\n\n      \"instagram\": \"instagram\",\n      \"facebook\": \"facebook\",\n      \"telegram\": \"telegram\",\n      \"linkedin\": \"linkedin\",\n      \"tiktok\": \"tiktok\",\n\n      \"service_has_features\": [\n        {\"service_feature_id\": 1},\n        {\"service_feature_id\": 3}\n      ],\n\n      \"price_level\": 3,\n      \"website\": \"website\",\n      \"phone\": \"phone\"\n    }]\n}",
+                "contentType": "application/json"
+            },
+            "name": "Edit service with supersede mode",
+            "method": "POST",
+            "params": [],
+            "headers": [],
+            "endpoint": "<<base_url>>/mutate",
+            "testScript": "",
+            "preRequestScript": ""
         }
     ]
 }
