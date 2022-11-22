@@ -538,6 +538,10 @@ export const orma_schema = {
           "ordinal_position": 17,
           "not_null": true,
           "character_count": 300
+        },
+        "location": {
+          "data_type": "user-defined",
+          "ordinal_position": 18
         }
       },
       "$foreign_keys": [
