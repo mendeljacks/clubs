@@ -542,6 +542,11 @@ export const orma_schema = {
         "location": {
           "data_type": "user-defined",
           "ordinal_position": 18
+        },
+        "google_place_id": {
+          "data_type": "character varying",
+          "ordinal_position": 19,
+          "character_count": 10485760
         }
       },
       "$foreign_keys": [
