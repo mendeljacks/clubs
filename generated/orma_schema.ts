@@ -34,76 +34,6 @@ export const orma_schema = {
         }
       ]
     },
-    "listings": {
-      "$database_type": "postgres",
-      "$fields": {
-        "id": {
-          "data_type": "integer",
-          "ordinal_position": 1,
-          "not_null": true,
-          "primary_key": true,
-          "character_count": 32,
-          "default": "BY DEFAULT"
-        },
-        "user_id": {
-          "data_type": "integer",
-          "ordinal_position": 2,
-          "not_null": true,
-          "character_count": 32
-        },
-        "description": {
-          "data_type": "character varying",
-          "ordinal_position": 3,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "created_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 4,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "updated_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 5,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "resource_id": {
-          "data_type": "character varying",
-          "ordinal_position": 6,
-          "not_null": true,
-          "character_count": 10485760
-        }
-      },
-      "$foreign_keys": [
-        {
-          "from_field": "user_id",
-          "to_entity": "users",
-          "to_field": "id"
-        }
-      ],
-      "$indexes": [
-        {
-          "index_name": "listings_pkey",
-          "is_unique": true,
-          "fields": [
-            "id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "listings_resource_id_uq",
-          "is_unique": true,
-          "fields": [
-            "resource_id"
-          ],
-          "invisible": false
-        }
-      ]
-    },
     "service_categories": {
       "$database_type": "postgres",
       "$fields": {
@@ -538,10 +468,6 @@ export const orma_schema = {
           "ordinal_position": 17,
           "not_null": true,
           "character_count": 300
-        },
-        "location": {
-          "data_type": "user-defined",
-          "ordinal_position": 18
         },
         "google_place_id": {
           "data_type": "character varying",
@@ -1232,10 +1158,6 @@ export const orma_schema = {
           "data_type": "character varying",
           "ordinal_position": 8,
           "character_count": 100
-        },
-        "location": {
-          "data_type": "user-defined",
-          "ordinal_position": 9
         }
       },
       "$foreign_keys": [
@@ -2518,47 +2440,84 @@ export const orma_schema = {
           "default": "true"
         }
       }
+    },
+    "listings": {
+      "$database_type": "postgres",
+      "$fields": {
+        "id": {
+          "data_type": "integer",
+          "ordinal_position": 1,
+          "not_null": true,
+          "primary_key": true,
+          "character_count": 32,
+          "default": "BY DEFAULT"
+        },
+        "user_id": {
+          "data_type": "integer",
+          "ordinal_position": 2,
+          "not_null": true,
+          "character_count": 32
+        },
+        "description": {
+          "data_type": "character varying",
+          "ordinal_position": 3,
+          "not_null": true,
+          "character_count": 10485760
+        },
+        "created_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 4,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "updated_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 5,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "resource_id": {
+          "data_type": "character varying",
+          "ordinal_position": 6,
+          "not_null": true,
+          "character_count": 10485760
+        },
+        "location": {
+          "data_type": "user-defined",
+          "ordinal_position": 11
+        }
+      },
+      "$foreign_keys": [
+        {
+          "from_field": "user_id",
+          "to_entity": "users",
+          "to_field": "id"
+        }
+      ],
+      "$indexes": [
+        {
+          "index_name": "listings_pkey",
+          "is_unique": true,
+          "fields": [
+            "id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "listings_resource_id_uq",
+          "is_unique": true,
+          "fields": [
+            "resource_id"
+          ],
+          "invisible": false
+        }
+      ]
     }
   },
   "$cache": {
     "$reversed_foreign_keys": {
-      "users": [
-        {
-          "from_field": "id",
-          "to_entity": "listings",
-          "to_field": "user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "likes",
-          "to_field": "user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "follows",
-          "to_field": "from_user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "follows",
-          "to_field": "to_user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "reviews",
-          "to_field": "user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "user_has_roles",
-          "to_field": "user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "favorites",
-          "to_field": "user_id"
-        }
-      ],
       "photos": [
         {
           "from_field": "id",
@@ -2630,6 +2589,43 @@ export const orma_schema = {
           "from_field": "id",
           "to_entity": "review_has_types",
           "to_field": "review_id"
+        }
+      ],
+      "users": [
+        {
+          "from_field": "id",
+          "to_entity": "likes",
+          "to_field": "user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "follows",
+          "to_field": "from_user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "follows",
+          "to_field": "to_user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "reviews",
+          "to_field": "user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "user_has_roles",
+          "to_field": "user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "favorites",
+          "to_field": "user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "listings",
+          "to_field": "user_id"
         }
       ],
       "listings": [
