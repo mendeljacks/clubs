@@ -396,18 +396,6 @@ export const orma_schema = {
           "not_null": true,
           "character_count": 32
         },
-        "name": {
-          "data_type": "character varying",
-          "ordinal_position": 3,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "city": {
-          "data_type": "character varying",
-          "ordinal_position": 5,
-          "not_null": true,
-          "character_count": 10485760
-        },
         "website": {
           "data_type": "character varying",
           "ordinal_position": 6,
@@ -468,11 +456,6 @@ export const orma_schema = {
           "ordinal_position": 17,
           "not_null": true,
           "character_count": 300
-        },
-        "google_place_id": {
-          "data_type": "character varying",
-          "ordinal_position": 19,
-          "character_count": 10485760
         }
       },
       "$foreign_keys": [
@@ -1117,17 +1100,6 @@ export const orma_schema = {
           "character_count": 32,
           "default": "BY DEFAULT"
         },
-        "name": {
-          "data_type": "character varying",
-          "ordinal_position": 2,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "google_place_id": {
-          "data_type": "character varying",
-          "ordinal_position": 3,
-          "character_count": 10485760
-        },
         "created_at": {
           "data_type": "timestamp without time zone",
           "ordinal_position": 4,
@@ -1153,11 +1125,6 @@ export const orma_schema = {
           "ordinal_position": 7,
           "not_null": true,
           "character_count": 32
-        },
-        "city": {
-          "data_type": "character varying",
-          "ordinal_position": 8,
-          "character_count": 100
         }
       },
       "$foreign_keys": [
@@ -1169,26 +1136,10 @@ export const orma_schema = {
       ],
       "$indexes": [
         {
-          "index_name": "places_google_place_id_uq",
-          "is_unique": true,
-          "fields": [
-            "google_place_id"
-          ],
-          "invisible": false
-        },
-        {
           "index_name": "places_listing_id_uq",
           "is_unique": true,
           "fields": [
             "listing_id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "places_name_uq",
-          "is_unique": true,
-          "fields": [
-            "name"
           ],
           "invisible": false
         },
@@ -2458,7 +2409,7 @@ export const orma_schema = {
           "not_null": true,
           "character_count": 32
         },
-        "description": {
+        "name": {
           "data_type": "character varying",
           "ordinal_position": 3,
           "not_null": true,
@@ -2487,6 +2438,16 @@ export const orma_schema = {
         "location": {
           "data_type": "user-defined",
           "ordinal_position": 11
+        },
+        "google_place_id": {
+          "data_type": "character varying",
+          "ordinal_position": 14,
+          "character_count": 10485760
+        },
+        "city": {
+          "data_type": "character varying",
+          "ordinal_position": 15,
+          "character_count": 10485760
         }
       },
       "$foreign_keys": [
