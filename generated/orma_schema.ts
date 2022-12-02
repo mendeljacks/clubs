@@ -1906,6 +1906,90 @@ export const orma_schema = {
         }
       ]
     },
+    "service_has_photos": {
+      "$database_type": "postgres",
+      "$fields": {
+        "id": {
+          "data_type": "integer",
+          "ordinal_position": 1,
+          "not_null": true,
+          "primary_key": true,
+          "character_count": 32,
+          "default": "BY DEFAULT"
+        },
+        "service_id": {
+          "data_type": "integer",
+          "ordinal_position": 2,
+          "not_null": true,
+          "character_count": 32
+        },
+        "photo_id": {
+          "data_type": "integer",
+          "ordinal_position": 3,
+          "not_null": true,
+          "character_count": 32
+        },
+        "created_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 4,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "updated_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 5,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "resource_id": {
+          "data_type": "character varying",
+          "ordinal_position": 6,
+          "not_null": true,
+          "character_count": 10485760
+        }
+      },
+      "$foreign_keys": [
+        {
+          "from_field": "photo_id",
+          "to_entity": "photos",
+          "to_field": "id"
+        },
+        {
+          "from_field": "service_id",
+          "to_entity": "services",
+          "to_field": "id"
+        }
+      ],
+      "$indexes": [
+        {
+          "index_name": "service_has_photos_pkey",
+          "is_unique": true,
+          "fields": [
+            "id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "service_has_photos_resource_id_uq",
+          "is_unique": true,
+          "fields": [
+            "resource_id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "service_has_photos_service_id_photo_id_uq",
+          "is_unique": true,
+          "fields": [
+            "service_id",
+            "photo_id"
+          ],
+          "invisible": false
+        }
+      ]
+    },
     "favorites": {
       "$database_type": "postgres",
       "$fields": {
@@ -2415,6 +2499,11 @@ export const orma_schema = {
           "from_field": "id",
           "to_entity": "review_has_photos",
           "to_field": "photo_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "service_has_photos",
+          "to_field": "photo_id"
         }
       ],
       "service_categories": [
@@ -2433,6 +2522,11 @@ export const orma_schema = {
         {
           "from_field": "id",
           "to_entity": "service_has_features",
+          "to_field": "service_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "service_has_photos",
           "to_field": "service_id"
         }
       ],

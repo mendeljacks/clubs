@@ -35,6 +35,7 @@ const publicly_readable = [
     'service_has_categories',
     'service_has_category',
     'service_has_features',
+    'service_has_photos',
     'services',
     'user_has_photos',
     'users'
