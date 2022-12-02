@@ -21,7 +21,6 @@ const publicly_readable = [
     'listing_has_features',
     'listing_has_photos',
     'listings',
-    'listings_full_info_view',
     'photos',
     'places',
     'review_has_photos',
