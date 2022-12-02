@@ -45,6 +45,7 @@ export const role_has_perms = {
     photos: { create: everyone, read: everyone, update: disabled, delete: everyone },
     reviews: { create: everyone, read: everyone, update: everyone, delete: admin_only },
     listings: full_access,
+    listings_full_info_view: full_access,
     places: users_read_admin_writes,
     user_has_roles: admin_access,
     roles: users_read_admin_writes,
