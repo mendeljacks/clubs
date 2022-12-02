@@ -34,76 +34,6 @@ export const orma_schema = {
         }
       ]
     },
-    "listings": {
-      "$database_type": "postgres",
-      "$fields": {
-        "id": {
-          "data_type": "integer",
-          "ordinal_position": 1,
-          "not_null": true,
-          "primary_key": true,
-          "character_count": 32,
-          "default": "BY DEFAULT"
-        },
-        "user_id": {
-          "data_type": "integer",
-          "ordinal_position": 2,
-          "not_null": true,
-          "character_count": 32
-        },
-        "description": {
-          "data_type": "character varying",
-          "ordinal_position": 3,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "created_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 4,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "updated_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 5,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "resource_id": {
-          "data_type": "character varying",
-          "ordinal_position": 6,
-          "not_null": true,
-          "character_count": 10485760
-        }
-      },
-      "$foreign_keys": [
-        {
-          "from_field": "user_id",
-          "to_entity": "users",
-          "to_field": "id"
-        }
-      ],
-      "$indexes": [
-        {
-          "index_name": "listings_pkey",
-          "is_unique": true,
-          "fields": [
-            "id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "listings_resource_id_uq",
-          "is_unique": true,
-          "fields": [
-            "resource_id"
-          ],
-          "invisible": false
-        }
-      ]
-    },
     "service_categories": {
       "$database_type": "postgres",
       "$fields": {
@@ -441,140 +371,6 @@ export const orma_schema = {
         },
         {
           "index_name": "follows_resource_id_uq",
-          "is_unique": true,
-          "fields": [
-            "resource_id"
-          ],
-          "invisible": false
-        }
-      ]
-    },
-    "services": {
-      "$database_type": "postgres",
-      "$fields": {
-        "id": {
-          "data_type": "integer",
-          "ordinal_position": 1,
-          "not_null": true,
-          "primary_key": true,
-          "character_count": 32,
-          "default": "BY DEFAULT"
-        },
-        "listing_id": {
-          "data_type": "integer",
-          "ordinal_position": 2,
-          "not_null": true,
-          "character_count": 32
-        },
-        "name": {
-          "data_type": "character varying",
-          "ordinal_position": 3,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "city": {
-          "data_type": "character varying",
-          "ordinal_position": 5,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "website": {
-          "data_type": "character varying",
-          "ordinal_position": 6,
-          "character_count": 10485760
-        },
-        "phone": {
-          "data_type": "character varying",
-          "ordinal_position": 7,
-          "character_count": 10485760
-        },
-        "price_level": {
-          "data_type": "integer",
-          "ordinal_position": 8,
-          "character_count": 32
-        },
-        "created_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 9,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "updated_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 10,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "resource_id": {
-          "data_type": "character varying",
-          "ordinal_position": 11,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "instagram": {
-          "data_type": "character varying",
-          "ordinal_position": 12
-        },
-        "facebook": {
-          "data_type": "character varying",
-          "ordinal_position": 13
-        },
-        "telegram": {
-          "data_type": "character varying",
-          "ordinal_position": 14
-        },
-        "linkedin": {
-          "data_type": "character varying",
-          "ordinal_position": 15
-        },
-        "tiktok": {
-          "data_type": "character varying",
-          "ordinal_position": 16
-        },
-        "type": {
-          "data_type": "character varying",
-          "ordinal_position": 17,
-          "not_null": true,
-          "character_count": 300
-        },
-        "location": {
-          "data_type": "user-defined",
-          "ordinal_position": 18
-        },
-        "google_place_id": {
-          "data_type": "character varying",
-          "ordinal_position": 19,
-          "character_count": 10485760
-        }
-      },
-      "$foreign_keys": [
-        {
-          "from_field": "listing_id",
-          "to_entity": "listings",
-          "to_field": "id"
-        }
-      ],
-      "$indexes": [
-        {
-          "index_name": "services_listing_id_uq",
-          "is_unique": true,
-          "fields": [
-            "listing_id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "services_pkey",
-          "is_unique": true,
-          "fields": [
-            "id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "services_resource_id_uq",
           "is_unique": true,
           "fields": [
             "resource_id"
@@ -964,6 +760,97 @@ export const orma_schema = {
         }
       ]
     },
+    "places": {
+      "$database_type": "postgres",
+      "$fields": {
+        "id": {
+          "data_type": "integer",
+          "ordinal_position": 1,
+          "not_null": true,
+          "primary_key": true,
+          "character_count": 32,
+          "default": "BY DEFAULT"
+        },
+        "created_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 4,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "updated_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 5,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "resource_id": {
+          "data_type": "character varying",
+          "ordinal_position": 6,
+          "not_null": true,
+          "character_count": 10485760
+        },
+        "listing_id": {
+          "data_type": "integer",
+          "ordinal_position": 7,
+          "not_null": true,
+          "character_count": 32
+        },
+        "name": {
+          "data_type": "character varying",
+          "ordinal_position": 12,
+          "character_count": 10485760
+        },
+        "google_place_id": {
+          "data_type": "character varying",
+          "ordinal_position": 13,
+          "character_count": 10485760
+        },
+        "city": {
+          "data_type": "character varying",
+          "ordinal_position": 14,
+          "character_count": 10485760
+        },
+        "location": {
+          "data_type": "user-defined",
+          "ordinal_position": 15
+        }
+      },
+      "$foreign_keys": [
+        {
+          "from_field": "listing_id",
+          "to_entity": "listings",
+          "to_field": "id"
+        }
+      ],
+      "$indexes": [
+        {
+          "index_name": "places_listing_id_uq",
+          "is_unique": true,
+          "fields": [
+            "listing_id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "places_pkey",
+          "is_unique": true,
+          "fields": [
+            "id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "places_resource_id_uq",
+          "is_unique": true,
+          "fields": [
+            "resource_id"
+          ],
+          "invisible": false
+        }
+      ]
+    },
     "reviews": {
       "$database_type": "postgres",
       "$fields": {
@@ -1172,114 +1059,6 @@ export const orma_schema = {
         },
         {
           "index_name": "users_resource_id_uq",
-          "is_unique": true,
-          "fields": [
-            "resource_id"
-          ],
-          "invisible": false
-        }
-      ]
-    },
-    "places": {
-      "$database_type": "postgres",
-      "$fields": {
-        "id": {
-          "data_type": "integer",
-          "ordinal_position": 1,
-          "not_null": true,
-          "primary_key": true,
-          "character_count": 32,
-          "default": "BY DEFAULT"
-        },
-        "name": {
-          "data_type": "character varying",
-          "ordinal_position": 2,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "google_place_id": {
-          "data_type": "character varying",
-          "ordinal_position": 3,
-          "character_count": 10485760
-        },
-        "created_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 4,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "updated_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 5,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "resource_id": {
-          "data_type": "character varying",
-          "ordinal_position": 6,
-          "not_null": true,
-          "character_count": 10485760
-        },
-        "listing_id": {
-          "data_type": "integer",
-          "ordinal_position": 7,
-          "not_null": true,
-          "character_count": 32
-        },
-        "city": {
-          "data_type": "character varying",
-          "ordinal_position": 8,
-          "character_count": 100
-        },
-        "location": {
-          "data_type": "user-defined",
-          "ordinal_position": 9
-        }
-      },
-      "$foreign_keys": [
-        {
-          "from_field": "listing_id",
-          "to_entity": "listings",
-          "to_field": "id"
-        }
-      ],
-      "$indexes": [
-        {
-          "index_name": "places_google_place_id_uq",
-          "is_unique": true,
-          "fields": [
-            "google_place_id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "places_listing_id_uq",
-          "is_unique": true,
-          "fields": [
-            "listing_id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "places_name_uq",
-          "is_unique": true,
-          "fields": [
-            "name"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "places_pkey",
-          "is_unique": true,
-          "fields": [
-            "id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "places_resource_id_uq",
           "is_unique": true,
           "fields": [
             "resource_id"
@@ -2033,90 +1812,6 @@ export const orma_schema = {
         }
       ]
     },
-    "service_has_photos": {
-      "$database_type": "postgres",
-      "$fields": {
-        "id": {
-          "data_type": "integer",
-          "ordinal_position": 1,
-          "not_null": true,
-          "primary_key": true,
-          "character_count": 32,
-          "default": "BY DEFAULT"
-        },
-        "service_id": {
-          "data_type": "integer",
-          "ordinal_position": 2,
-          "not_null": true,
-          "character_count": 32
-        },
-        "photo_id": {
-          "data_type": "integer",
-          "ordinal_position": 3,
-          "not_null": true,
-          "character_count": 32
-        },
-        "created_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 4,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "updated_at": {
-          "data_type": "timestamp without time zone",
-          "ordinal_position": 5,
-          "not_null": true,
-          "decimal_places": 6,
-          "default": "now()"
-        },
-        "resource_id": {
-          "data_type": "character varying",
-          "ordinal_position": 6,
-          "not_null": true,
-          "character_count": 10485760
-        }
-      },
-      "$foreign_keys": [
-        {
-          "from_field": "photo_id",
-          "to_entity": "photos",
-          "to_field": "id"
-        },
-        {
-          "from_field": "service_id",
-          "to_entity": "services",
-          "to_field": "id"
-        }
-      ],
-      "$indexes": [
-        {
-          "index_name": "service_has_photos_pkey",
-          "is_unique": true,
-          "fields": [
-            "id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "service_has_photos_resource_id_uq",
-          "is_unique": true,
-          "fields": [
-            "resource_id"
-          ],
-          "invisible": false
-        },
-        {
-          "index_name": "service_has_photos_service_id_photo_id_uq",
-          "is_unique": true,
-          "fields": [
-            "service_id",
-            "photo_id"
-          ],
-          "invisible": false
-        }
-      ]
-    },
     "favorites": {
       "$database_type": "postgres",
       "$fields": {
@@ -2518,47 +2213,302 @@ export const orma_schema = {
           "default": "true"
         }
       }
+    },
+    "listings": {
+      "$database_type": "postgres",
+      "$fields": {
+        "id": {
+          "data_type": "integer",
+          "ordinal_position": 1,
+          "not_null": true,
+          "primary_key": true,
+          "character_count": 32,
+          "default": "BY DEFAULT"
+        },
+        "user_id": {
+          "data_type": "integer",
+          "ordinal_position": 2,
+          "not_null": true,
+          "character_count": 32
+        },
+        "description": {
+          "data_type": "character varying",
+          "ordinal_position": 3,
+          "not_null": true,
+          "character_count": 10485760
+        },
+        "created_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 4,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "updated_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 5,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "resource_id": {
+          "data_type": "character varying",
+          "ordinal_position": 6,
+          "not_null": true,
+          "character_count": 10485760
+        },
+        "location": {
+          "data_type": "user-defined",
+          "ordinal_position": 16
+        }
+      },
+      "$foreign_keys": [
+        {
+          "from_field": "user_id",
+          "to_entity": "users",
+          "to_field": "id"
+        }
+      ],
+      "$indexes": [
+        {
+          "index_name": "listings_pkey",
+          "is_unique": true,
+          "fields": [
+            "id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "listings_resource_id_uq",
+          "is_unique": true,
+          "fields": [
+            "resource_id"
+          ],
+          "invisible": false
+        }
+      ]
+    },
+    "service_has_photos": {
+      "$database_type": "postgres",
+      "$fields": {
+        "id": {
+          "data_type": "integer",
+          "ordinal_position": 1,
+          "not_null": true,
+          "primary_key": true,
+          "character_count": 32,
+          "default": "BY DEFAULT"
+        },
+        "service_id": {
+          "data_type": "integer",
+          "ordinal_position": 2,
+          "not_null": true,
+          "character_count": 32
+        },
+        "photo_id": {
+          "data_type": "integer",
+          "ordinal_position": 3,
+          "not_null": true,
+          "character_count": 32
+        },
+        "created_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 4,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "updated_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 5,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "resource_id": {
+          "data_type": "character varying",
+          "ordinal_position": 6,
+          "not_null": true,
+          "character_count": 10485760
+        }
+      },
+      "$foreign_keys": [
+        {
+          "from_field": "photo_id",
+          "to_entity": "photos",
+          "to_field": "id"
+        },
+        {
+          "from_field": "service_id",
+          "to_entity": "services",
+          "to_field": "id"
+        }
+      ],
+      "$indexes": [
+        {
+          "index_name": "service_has_photos_pkey",
+          "is_unique": true,
+          "fields": [
+            "id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "service_has_photos_resource_id_uq",
+          "is_unique": true,
+          "fields": [
+            "resource_id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "service_has_photos_service_id_photo_id_uq",
+          "is_unique": true,
+          "fields": [
+            "service_id",
+            "photo_id"
+          ],
+          "invisible": false
+        }
+      ]
+    },
+    "services": {
+      "$database_type": "postgres",
+      "$fields": {
+        "id": {
+          "data_type": "integer",
+          "ordinal_position": 1,
+          "not_null": true,
+          "primary_key": true,
+          "character_count": 32,
+          "default": "BY DEFAULT"
+        },
+        "listing_id": {
+          "data_type": "integer",
+          "ordinal_position": 2,
+          "not_null": true,
+          "character_count": 32
+        },
+        "website": {
+          "data_type": "character varying",
+          "ordinal_position": 6,
+          "character_count": 10485760
+        },
+        "phone": {
+          "data_type": "character varying",
+          "ordinal_position": 7,
+          "character_count": 10485760
+        },
+        "price_level": {
+          "data_type": "integer",
+          "ordinal_position": 8,
+          "character_count": 32
+        },
+        "created_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 9,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "updated_at": {
+          "data_type": "timestamp without time zone",
+          "ordinal_position": 10,
+          "not_null": true,
+          "decimal_places": 6,
+          "default": "now()"
+        },
+        "resource_id": {
+          "data_type": "character varying",
+          "ordinal_position": 11,
+          "not_null": true,
+          "character_count": 10485760
+        },
+        "instagram": {
+          "data_type": "character varying",
+          "ordinal_position": 12
+        },
+        "facebook": {
+          "data_type": "character varying",
+          "ordinal_position": 13
+        },
+        "telegram": {
+          "data_type": "character varying",
+          "ordinal_position": 14
+        },
+        "linkedin": {
+          "data_type": "character varying",
+          "ordinal_position": 15
+        },
+        "tiktok": {
+          "data_type": "character varying",
+          "ordinal_position": 16
+        },
+        "type": {
+          "data_type": "character varying",
+          "ordinal_position": 17,
+          "not_null": true,
+          "character_count": 300
+        },
+        "name": {
+          "data_type": "character varying",
+          "ordinal_position": 22,
+          "not_null": true,
+          "character_count": 10485760
+        },
+        "google_place_id": {
+          "data_type": "character varying",
+          "ordinal_position": 23,
+          "character_count": 10485760
+        },
+        "city": {
+          "data_type": "character varying",
+          "ordinal_position": 24,
+          "not_null": true,
+          "character_count": 10485760
+        },
+        "location": {
+          "data_type": "user-defined",
+          "ordinal_position": 25
+        }
+      },
+      "$foreign_keys": [
+        {
+          "from_field": "listing_id",
+          "to_entity": "listings",
+          "to_field": "id"
+        }
+      ],
+      "$indexes": [
+        {
+          "index_name": "services_listing_id_uq",
+          "is_unique": true,
+          "fields": [
+            "listing_id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "services_pkey",
+          "is_unique": true,
+          "fields": [
+            "id"
+          ],
+          "invisible": false
+        },
+        {
+          "index_name": "services_resource_id_uq",
+          "is_unique": true,
+          "fields": [
+            "resource_id"
+          ],
+          "invisible": false
+        }
+      ]
     }
   },
   "$cache": {
     "$reversed_foreign_keys": {
-      "users": [
-        {
-          "from_field": "id",
-          "to_entity": "listings",
-          "to_field": "user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "likes",
-          "to_field": "user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "follows",
-          "to_field": "from_user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "follows",
-          "to_field": "to_user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "reviews",
-          "to_field": "user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "user_has_roles",
-          "to_field": "user_id"
-        },
-        {
-          "from_field": "id",
-          "to_entity": "favorites",
-          "to_field": "user_id"
-        }
-      ],
       "photos": [
         {
           "from_field": "id",
@@ -2632,12 +2582,44 @@ export const orma_schema = {
           "to_field": "review_id"
         }
       ],
-      "listings": [
+      "users": [
         {
           "from_field": "id",
-          "to_entity": "services",
-          "to_field": "listing_id"
+          "to_entity": "likes",
+          "to_field": "user_id"
         },
+        {
+          "from_field": "id",
+          "to_entity": "follows",
+          "to_field": "from_user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "follows",
+          "to_field": "to_user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "reviews",
+          "to_field": "user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "user_has_roles",
+          "to_field": "user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "favorites",
+          "to_field": "user_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "listings",
+          "to_field": "user_id"
+        }
+      ],
+      "listings": [
         {
           "from_field": "id",
           "to_entity": "listing_has_photos",
@@ -2650,12 +2632,12 @@ export const orma_schema = {
         },
         {
           "from_field": "id",
-          "to_entity": "reviews",
+          "to_entity": "places",
           "to_field": "listing_id"
         },
         {
           "from_field": "id",
-          "to_entity": "places",
+          "to_entity": "reviews",
           "to_field": "listing_id"
         },
         {
@@ -2666,6 +2648,11 @@ export const orma_schema = {
         {
           "from_field": "id",
           "to_entity": "favorites",
+          "to_field": "listing_id"
+        },
+        {
+          "from_field": "id",
+          "to_entity": "services",
           "to_field": "listing_id"
         }
       ],
